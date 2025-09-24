@@ -1,67 +1,24 @@
-const CACHE_NAME = 'al-ibdaa-cache-v5';
+const CACHE_NAME = 'al-ibdaa-cache-v6';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/index.tsx',
-  '/App.tsx',
   '/manifest.json',
   '/icon.svg',
-  '/ThemeContext.tsx',
-  '/lib/supabase.ts',
-  '/types.ts',
 ];
 
+// On install, cache the core app shell
 self.addEventListener('install', event => {
-  // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(function(cache) {
+      .then(cache => {
         console.log('Opened cache');
-        // Add core files to the cache. Others will be cached on fetch.
         return cache.addAll(urlsToCache);
       })
+      .then(() => self.skipWaiting()) // Activate new SW immediately
   );
 });
 
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(function(response) {
-        // Cache hit - return response
-        if (response) {
-          return response;
-        }
-        
-        return fetch(event.request).then(
-          function(response) {
-            // Check if we received a valid response
-            if(!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-
-            // IMPORTANT: Clone the response. A response is a stream
-            // and because we want the browser to consume the response
-            // as well as the cache consuming the response, we need
-            // to clone it so we have two streams.
-            var responseToCache = response.clone();
-
-            caches.open(CACHE_NAME)
-              .then(function(cache) {
-                // Don't cache API calls
-                if (event.request.url.includes('supabase.co')) {
-                    return;
-                }
-                cache.put(event.request, responseToCache);
-              });
-
-            return response;
-          }
-        );
-      })
-    );
-});
-
-
+// On activation, clean up old caches
 self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
@@ -73,6 +30,47 @@ self.addEventListener('activate', event => {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim()) // Take control of clients
+  );
+});
+
+// On fetch, use a cache-first strategy
+self.addEventListener('fetch', event => {
+  // Let browser handle Supabase API calls, do not cache them.
+  if (event.request.url.includes('supabase.co')) {
+    return; 
+  }
+  
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        // Return from cache if found
+        if (response) {
+          return response;
+        }
+        
+        // Otherwise, fetch from network, cache it, and return it
+        return fetch(event.request).then(
+          networkResponse => {
+            // Check if we received a valid response to avoid caching errors
+            if (!networkResponse || networkResponse.status !== 200) {
+              return networkResponse;
+            }
+
+            // Clone the response because it's a one-time-use stream
+            const responseToCache = networkResponse.clone();
+
+            caches.open(CACHE_NAME)
+              .then(cache => {
+                cache.put(event.request, responseToCache);
+              });
+
+            return networkResponse;
+          }
+        ).catch(error => {
+            console.error('Fetching failed:', error);
+            // You could return a custom offline page here if you had one in the cache
+        });
+      })
   );
 });
