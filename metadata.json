@@ -1,0 +1,5 @@
+{
+  "name": "Al-Ibdaa Platform",
+  "description": "An educational platform named Al-Ibdaa, providing lectures, exams, grades, and an honor board. This application is a modern, responsive frontend built with React and TypeScript, ready for Supabase integration.",
+  "requestFramePermissions": []
+}
