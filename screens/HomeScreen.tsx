@@ -19,6 +19,7 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
   const [unwatchedLectures, setUnwatchedLectures] = useState<Lecture[]>([]);
   const [student, setStudent] = useState<(StudentProfile & {rank: number}) | null>(null);
   const [performancePercentage, setPerformancePercentage] = useState(0);
+  const { canInstall, promptInstall } = usePWAInstall();
 
   useEffect(() => {
     const fetchData = async () => {
