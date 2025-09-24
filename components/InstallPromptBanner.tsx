@@ -20,7 +20,7 @@ const InstallPromptBanner: React.FC = () => {
         </div>
         <div className="flex items-center gap-2">
           <button onClick={dismiss} className="text-xs px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">لاحقًا</button>
-          <button onClick={promptInstall} className="text-xs px-3 py-1.5 rounded-full bg-blue-600 text-white dark:bg-blue-500">تثبيت</button>
+          <button onClick={promptInstall} className="text-xs px-3 py-1.5 rounded-full bg-blue-600 text-white dark:bg-blue-500">تثبيت على الهاتف</button>
         </div>
       </div>
     </div>
