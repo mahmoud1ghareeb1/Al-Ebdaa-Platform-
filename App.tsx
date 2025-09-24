@@ -159,12 +159,7 @@ const App: React.FC = () => {
               />
           </Suspense>
       )}
-      {!isModalScreenActive && (
-        <Suspense fallback={null}>
-          {/* Inline import to avoid top-level import affecting bundle splitting */}
-          {React.createElement(require('./components/InstallPromptBanner').default)}
-        </Suspense>
-      )}
+      {!isModalScreenActive && <InstallPromptBanner />}
       </div>
     );
   };
