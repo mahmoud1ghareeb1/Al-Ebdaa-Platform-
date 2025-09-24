@@ -11,6 +11,7 @@ import ChevronLeftIcon from '../components/icons/ChevronLeftIcon';
 import CheckCircleIcon from '../components/icons/CheckCircleIcon';
 import PlayIcon from '../components/icons/PlayIcon';
 import { HomeScreenSkeleton } from '../components/Skeletons';
+import { usePWAInstall } from '../hooks/usePWAInstall';
 
 
 const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActiveView }) => {
