@@ -1,82 +1,77 @@
-const CACHE_NAME = 'al-ibdaa-cache-v7'; // Incremented version
+const CACHE_NAME = 'al-ibdaa-cache-v5';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/index.tsx', // Added the main script
+  '/index.tsx',
+  '/App.tsx',
   '/manifest.json',
   '/icon.svg',
+  '/ThemeContext.tsx',
+  '/lib/supabase.ts',
+  '/types.ts',
 ];
 
-// On install, cache the core app shell
 self.addEventListener('install', event => {
-  console.log('Service Worker: Installing...');
+  // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('Service Worker: Caching app shell');
+      .then(function(cache) {
+        console.log('Opened cache');
+        // Add core files to the cache. Others will be cached on fetch.
         return cache.addAll(urlsToCache);
-      })
-      .then(() => {
-        console.log('Service Worker: App shell cached, activating now.');
-        return self.skipWaiting(); // Activate the new service worker immediately
-      })
-      .catch(error => {
-        console.error('Service Worker: Caching failed', error);
       })
   );
 });
 
-// On activation, clean up old caches
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+        // Cache hit - return response
+        if (response) {
+          return response;
+        }
+
+        return fetch(event.request).then(
+          function(response) {
+            // Check if we received a valid response
+            if(!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+
+            // IMPORTANT: Clone the response. A response is a stream
+            // and because we want the browser to consume the response
+            // as well as the cache consuming the response, we need
+            // to clone it so we have two streams.
+            var responseToCache = response.clone();
+
+            caches.open(CACHE_NAME)
+              .then(function(cache) {
+                // Don't cache API calls
+                if (event.request.url.includes('supabase.co')) {
+                  return;
+                }
+                cache.put(event.request, responseToCache);
+              });
+
+            return response;
+          }
+        );
+      })
+  );
+});
+
 self.addEventListener('activate', event => {
-  console.log('Service Worker: Activating...');
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
           if (cacheWhitelist.indexOf(cacheName) === -1) {
-            console.log('Service Worker: Deleting old cache', cacheName);
             return caches.delete(cacheName);
           }
         })
       );
-    }).then(() => {
-        console.log('Service Worker: Claiming clients.');
-        return self.clients.claim(); // Take control of all open clients
     })
-  );
-});
-
-// On fetch, use a cache-first strategy
-self.addEventListener('fetch', event => {
-  // Let browser handle Supabase API calls, do not cache them.
-  if (event.request.url.includes('supabase.co')) {
-    return;
-  }
-  
-  // Let the browser handle external CDN resources like Tailwind and fonts
-  // The service worker will only cache local assets from the urlsToCache list
-  if (event.request.url.startsWith('https://')) {
-    return;
-  }
-  
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Return from cache if found
-        if (response) {
-          return response;
-        }
-        
-        // Otherwise, fetch from network
-        return fetch(event.request).then(
-          networkResponse => {
-            // Check if we received a valid response to avoid caching errors
-            // We don't cache network responses here anymore to keep it simple,
-            // only the initial app shell is cached on install.
-            return networkResponse;
-          }
-        );
-      })
   );
 });
