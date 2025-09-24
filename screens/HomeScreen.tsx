@@ -87,7 +87,7 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
       <div className="bg-white dark:bg-zinc-900 p-5 rounded-2xl shadow-lg shadow-blue-500/5 dark:shadow-blue-900/30 text-center">
         <p className="text-lg font-bold text-zinc-800 dark:text-zinc-200">
           <span className="text-blue-600 dark:text-blue-400">"</span>
-          مستقبلك بين يديك، والعلم هو مفتاحك.
+          قل ربي زدني علما
           <span className="text-blue-600 dark:text-blue-400">"</span>
         </p>
       </div>
