@@ -78,7 +78,7 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
     { label: 'الاختبارات', icon: ClipboardListIcon, view: 'exams' as View },
     { label: 'صور السبورة', icon: CameraIcon, view: 'photos' as View },
     { label: 'الدرجات والنتائج', icon: ChartBarIcon, view: 'grades' as View },
-    { label: 'الواجب ورسائل ال��درس', icon: BriefcaseIcon, view: 'homework' as View },
+    { label: 'الواجب ورسائل المدرس', icon: BriefcaseIcon, view: 'homework' as View },
     { label: 'لوحة الشرف', icon: TrophyIcon, view: 'honorBoard' as View },
   ];
   
@@ -153,7 +153,7 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
               alt="تثبيت التطبيق"
               className="w-10 h-10 rounded-xl object-cover"
             />
-            <span className="font-semibold text-zinc-700 dark:text-zinc-300">تثبيت التطبيق</span>
+            <span className="font-semibold text-zinc-700 dark:text-zinc-300">تثبيت على الهاتف</span>
           </button>
         )}
         {gridItems.map((item) => (
