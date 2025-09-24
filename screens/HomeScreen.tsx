@@ -11,6 +11,7 @@ import ChevronLeftIcon from '../components/icons/ChevronLeftIcon';
 import CheckCircleIcon from '../components/icons/CheckCircleIcon';
 import PlayIcon from '../components/icons/PlayIcon';
 import { HomeScreenSkeleton } from '../components/Skeletons';
+import InstallIcon from '../components/icons/InstallIcon';
 
 
 const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActiveView }) => {
@@ -18,6 +19,33 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
   const [unwatchedLectures, setUnwatchedLectures] = useState<Lecture[]>([]);
   const [student, setStudent] = useState<(StudentProfile & {rank: number}) | null>(null);
   const [performancePercentage, setPerformancePercentage] = useState(0);
+  const [installPrompt, setInstallPrompt] = useState<any>(null);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      setInstallPrompt(e);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!installPrompt) return;
+    installPrompt.prompt();
+    const { outcome } = await installPrompt.userChoice;
+    if (outcome === 'accepted') {
+      console.log('User accepted the install prompt');
+    } else {
+      console.log('User dismissed the install prompt');
+    }
+    setInstallPrompt(null);
+  };
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -150,6 +178,15 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
             <span className="font-semibold text-zinc-700 dark:text-zinc-300">{item.label}</span>
           </button>
         ))}
+        {installPrompt && (
+          <button 
+              key="install" 
+              onClick={handleInstallClick} 
+              className="bg-white dark:bg-zinc-900 p-4 rounded-2xl shadow-md dark:shadow-blue-900/20 flex flex-col items-center justify-center space-y-2 text-center transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:shadow-xl hover:-translate-y-1">
+              <InstallIcon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+              <span className="font-semibold text-zinc-700 dark:text-zinc-300">تثبيت على الهاتف</span>
+          </button>
+        )}
       </div>
     </div>
   );

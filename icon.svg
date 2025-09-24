@@ -1,4 +1,30 @@
-<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="512" height="512" rx="96" fill="#2563EB"/>
-<text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="300" font-weight="bold" fill="white">إ</text>
+<svg width="512" height="512" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" rx="20" fill="#E0F2FE"/>
+
+    <!-- Lightbulb glass -->
+    <path d="M50 20 C 35 20, 25 35, 25 50 C 25 68, 40 70, 40 75 L 60 75 C 60 70, 75 68, 75 50 C 75 35, 65 20, 50 20 Z" fill="#FFF9C4"/>
+    <!-- Lightbulb base -->
+    <rect x="40" y="75" width="20" height="10" rx="2" fill="#BDBDBD"/>
+    
+    <!-- Brain -->
+    <path d="M50 35
+            c -5 0 -8 5 -8 10
+            c 0 5 3 10 8 10
+            s 8 -5 8 -10
+            c 0 -5 -3 -10 -8 -10
+            
+            m -10 10 
+            c -2 0 -3 2 -2 4 
+            c 1 2 4 2 5 0
+            
+            m 15 -4
+            c 2 0 3 2 2 4
+            c -1 2 -4 2 -5 0
+            " fill="#F48FB1"/>
+    <path d="M50 45 L 50 55" stroke="#F06292" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Light rays -->
+    <path d="M50 12 V 18" stroke="#FFCA28" stroke-width="3" stroke-linecap="round"/>
+    <path d="M35 20 l -4 -4" stroke="#FFCA28" stroke-width="3" stroke-linecap="round"/>
+    <path d="M65 20 l 4 -4" stroke="#FFCA28" stroke-width="3" stroke-linecap="round"/>
 </svg>
