@@ -10,7 +10,7 @@ import LogoutIcon from '../components/icons/LogoutIcon';
 import SunIcon from '../components/icons/SunIcon';
 import MoonIcon from '../components/icons/MoonIcon';
 import type { View, StudentProfile } from '../types';
-import { useTheme, toggleTheme } from '../hooks/useTheme';
+import { useTheme } from '../ThemeContext';
 import Avatar from '../components/Avatar';
 import ConfirmationModal from '../components/ConfirmationModal';
 
@@ -22,26 +22,40 @@ interface ProfileMenuProps {
 }
 
 const ThemeToggle: React.FC = () => {
-    const theme = useTheme();
+    const { theme, toggleTheme } = useTheme();
 
     return (
-        <div className="flex items-center space-x-2 space-x-reverse">
-            <SunIcon className={`w-6 h-6 transition-colors ${theme === 'light' ? 'text-amber-500' : 'text-slate-500'}`} />
-            <button
-                onClick={toggleTheme}
-                className={`relative inline-flex items-center h-7 w-12 rounded-full transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-slate-900 ${
-                theme === 'dark' ? 'bg-blue-600' : 'bg-slate-300'
+        <button
+            onClick={toggleTheme}
+            className={`relative inline-flex h-8 w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent p-1 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900 ${
+            theme === 'dark' ? 'bg-blue-600' : 'bg-slate-300'
+            }`}
+            aria-label="Toggle dark mode"
+        >
+            <span
+                aria-hidden="true"
+                className={`pointer-events-none relative inline-block h-6 w-6 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                theme === 'dark' ? '-translate-x-6' : 'translate-x-0'
                 }`}
-                aria-label="Toggle dark mode"
             >
+                {/* Light mode icon container */}
                 <span
-                className={`inline-block w-5 h-5 transform bg-white rounded-full transition-transform duration-300 ease-in-out ${
-                    theme === 'dark' ? 'translate-x-6' : 'translate-x-1'
-                }`}
-                />
-            </button>
-             <MoonIcon className={`w-6 h-6 transition-colors ${theme === 'dark' ? 'text-blue-500' : 'text-slate-500'}`} />
-        </div>
+                    className={`absolute inset-0 flex h-full w-full items-center justify-center transition-opacity duration-200 ${
+                    theme === 'light' ? 'opacity-100 ease-in' : 'opacity-0 ease-out'
+                    }`}
+                >
+                    <SunIcon className="h-4 w-4 text-amber-500" />
+                </span>
+                {/* Dark mode icon container */}
+                <span
+                    className={`absolute inset-0 flex h-full w-full items-center justify-center transition-opacity duration-200 ${
+                    theme === 'dark' ? 'opacity-100 ease-in' : 'opacity-0 ease-out'
+                    }`}
+                >
+                    <MoonIcon className="h-4 w-4 text-blue-600" />
+                </span>
+            </span>
+        </button>
     );
 };
 
@@ -102,7 +116,7 @@ const ProfileMenuScreen: React.FC<ProfileMenuProps> = ({ isOpen, onClose, setAct
               <button onClick={onClose} className="absolute top-4 left-4 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">
                   <XIcon />
               </button>
-              <div className="border-4 border-slate-200 dark:border-slate-800 rounded-full overflow-hidden">
+              <div className="border-4 border-slate-200 dark:border-blue-800 rounded-full overflow-hidden">
                 <Avatar src={profile?.avatar_url} name={profile?.full_name} />
               </div>
               <h2 className="text-xl font-bold text-slate-800 dark:text-slate-200">{profile?.full_name || '...'}</h2>
@@ -125,7 +139,7 @@ const ProfileMenuScreen: React.FC<ProfileMenuProps> = ({ isOpen, onClose, setAct
                  <LogoutIcon className="w-6 h-6" />
               </button>
 
-               <div className="flex items-center justify-center w-full pt-4 border-t border-slate-200 dark:border-slate-800 mt-2">
+               <div className="flex items-center justify-center w-full pt-4 border-t border-slate-200 dark:border-blue-900/50 mt-2">
                   <ThemeToggle />
               </div>
           </div>

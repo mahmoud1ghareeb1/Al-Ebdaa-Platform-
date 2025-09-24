@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from '../lib/supabase';
 import type { StudentProfile } from '../types';
-import { useTheme, toggleTheme } from '../hooks/useTheme';
+import { useTheme } from '../ThemeContext';
 import SunIcon from '../components/icons/SunIcon';
 import MoonIcon from '../components/icons/MoonIcon';
 
@@ -18,7 +18,7 @@ const AuthScreen: React.FC = () => {
   const [group, setGroup] = useState<'مجموعة 1' | 'مجموعة 2' | 'ابو حماد'>('مجموعة 1');
 
   const [error, setError] = useState<string | null>(null);
-  const theme = useTheme();
+  const { theme, toggleTheme } = useTheme();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -95,7 +95,7 @@ const AuthScreen: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-slate-950 flex flex-col justify-center items-center p-4">
+    <div className="min-h-screen bg-slate-100 dark:bg-sky-950 flex flex-col justify-center items-center p-4">
        <div className="absolute top-4 right-4 z-10">
             <button 
                 onClick={toggleTheme} 
@@ -108,7 +108,7 @@ const AuthScreen: React.FC = () => {
                 }
             </button>
         </div>
-      <div className="w-full max-w-sm mx-auto bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-lg shadow-slate-400/10 dark:shadow-black/20">
+      <div className="w-full max-w-sm mx-auto bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-lg shadow-slate-400/10 dark:shadow-blue-900/30">
         <div className="text-center mb-8">
             <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-200">منصة الإبداع</h1>
             <p className="text-slate-500 dark:text-slate-400 mt-2">{isSignUp ? 'إنشاء حساب جديد' : 'تسجيل الدخول للمتابعة'}</p>

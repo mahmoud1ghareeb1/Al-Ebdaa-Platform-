@@ -1,18 +1,23 @@
-const CACHE_NAME = 'al-ibdaa-platform-v1';
+const CACHE_NAME = 'al-ibdaa-cache-v5';
 const urlsToCache = [
   '/',
   '/index.html',
+  '/index.tsx',
+  '/App.tsx',
+  '/manifest.json',
   '/icon.svg',
-  'https://cdn.tailwindcss.com',
-  'https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap'
+  '/ThemeContext.tsx',
+  '/lib/supabase.ts',
+  '/types.ts',
 ];
 
 self.addEventListener('install', event => {
-  self.skipWaiting();
+  // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => {
+      .then(function(cache) {
         console.log('Opened cache');
+        // Add core files to the cache. Others will be cached on fetch.
         return cache.addAll(urlsToCache);
       })
   );
@@ -21,14 +26,41 @@ self.addEventListener('install', event => {
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
-      .then(response => {
+      .then(function(response) {
+        // Cache hit - return response
         if (response) {
           return response;
         }
-        return fetch(event.request);
+        
+        return fetch(event.request).then(
+          function(response) {
+            // Check if we received a valid response
+            if(!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+
+            // IMPORTANT: Clone the response. A response is a stream
+            // and because we want the browser to consume the response
+            // as well as the cache consuming the response, we need
+            // to clone it so we have two streams.
+            var responseToCache = response.clone();
+
+            caches.open(CACHE_NAME)
+              .then(function(cache) {
+                // Don't cache API calls
+                if (event.request.url.includes('supabase.co')) {
+                    return;
+                }
+                cache.put(event.request, responseToCache);
+              });
+
+            return response;
+          }
+        );
       })
-  );
+    );
 });
+
 
 self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];

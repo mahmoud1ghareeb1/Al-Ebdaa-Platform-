@@ -148,12 +148,12 @@ const GradesScreen: React.FC<GradesScreenProps> = ({ onReviewExam }) => {
   return (
     <div className="lg:grid lg:grid-cols-12 lg:gap-8 lg:items-start">
       <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-6">
-          <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-lg dark:shadow-black/20 text-center space-y-4">
-            <div className="w-24 h-24 rounded-full mx-auto border-4 border-slate-200 dark:border-slate-800 overflow-hidden">
+          <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-lg dark:shadow-blue-900/30 text-center space-y-4">
+            <div className="w-24 h-24 rounded-full mx-auto border-4 border-slate-200 dark:border-blue-800 overflow-hidden">
                 <Avatar src={student.avatar_url} name={student.full_name} />
             </div>
             <h2 className="text-xl font-bold text-slate-800 dark:text-slate-200">{student.full_name}</h2>
-            <div className="text-right divide-y divide-slate-200 dark:divide-slate-800">
+            <div className="text-right divide-y divide-slate-200 dark:divide-blue-800/50">
                 <InfoRow label="اسم الطالب" value={student.full_name} />
                 <InfoRow label="عدد الامتحانات" value={student.examCount} />
                 <InfoRow label="عدد الدرجات الإجمالية" value={student.totalScore} />
@@ -166,7 +166,7 @@ const GradesScreen: React.FC<GradesScreenProps> = ({ onReviewExam }) => {
         <h3 className="text-xl font-bold text-center mb-4 text-slate-800 dark:text-slate-200">نتائج الاختبارات</h3>
         <div className="space-y-4">
           {examResults.length > 0 ? examResults.map((result) => (
-            <div key={result.id} className="bg-white dark:bg-slate-900 rounded-2xl shadow-md dark:shadow-black/20 overflow-hidden">
+            <div key={result.id} className="bg-white dark:bg-slate-900 rounded-2xl shadow-md dark:shadow-blue-900/20 overflow-hidden">
               <div className="p-5">
                 <h4 className="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4 text-right">{result.examName}</h4>
                 

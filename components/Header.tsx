@@ -1,6 +1,6 @@
 import React from 'react';
 import MenuIcon from './icons/MenuIcon';
-import { useTheme, toggleTheme } from '../hooks/useTheme';
+import { useTheme } from '../ThemeContext';
 import SunIcon from './icons/SunIcon';
 import MoonIcon from './icons/MoonIcon';
 
@@ -10,13 +10,13 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ title, onMenuClick }) => {
-  const theme = useTheme();
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className="bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm sticky top-0 z-20 w-full mx-auto border-b border-slate-200 dark:border-slate-800">
+    <header className="bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm sticky top-0 z-20 w-full mx-auto border-b border-slate-200 dark:border-blue-900/50">
       <div className="grid grid-cols-3 items-center p-4 h-16 px-4 md:px-6">
         <div className="flex justify-start">
-            <button onClick={onMenuClick} className="text-slate-700 dark:text-slate-300 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            <button onClick={onMenuClick} className="text-slate-700 dark:text-slate-300 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Open menu">
                 <MenuIcon />
             </button>
         </div>

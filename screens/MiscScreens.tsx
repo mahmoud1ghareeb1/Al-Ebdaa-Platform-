@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from 'react';
 import BookOpenIcon from '../components/icons/BookOpenIcon';
 import FolderIcon from '../components/icons/FolderIcon';
@@ -10,7 +11,7 @@ import ArrowRightIcon from '../components/icons/ArrowRightIcon';
 import XIcon from '../components/icons/XIcon';
 
 const EmptyState: React.FC<{ icon: React.ElementType; message: string }> = ({ icon: Icon, message }) => (
-  <div className="flex flex-col items-center justify-center text-center bg-white dark:bg-slate-900 p-8 rounded-2xl h-64 shadow-lg dark:shadow-black/20">
+  <div className="flex flex-col items-center justify-center text-center bg-white dark:bg-slate-900 p-8 rounded-2xl h-64 shadow-lg dark:shadow-blue-900/30">
     <Icon className="w-16 h-16 text-slate-400 dark:text-slate-500 mb-4" />
     <p className="text-lg font-semibold text-slate-600 dark:text-slate-400">{message}</p>
   </div>
@@ -107,7 +108,7 @@ const PhotosScreen: React.FC = () => {
                 {loadingPhotos ? <Spinner /> : (
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                         {photos.length > 0 ? photos.map(photo => (
-                            <button key={photo.id} className="aspect-square bg-white dark:bg-slate-900 rounded-lg shadow-md dark:shadow-black/20 overflow-hidden group transition-transform transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" onClick={() => setSelectedImageUrl(photo.image_url)}>
+                            <button key={photo.id} className="aspect-square bg-white dark:bg-slate-900 rounded-lg shadow-md dark:shadow-blue-900/20 overflow-hidden group transition-transform transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" onClick={() => setSelectedImageUrl(photo.image_url)}>
                                 <img src={photo.image_url} alt={`Photo ${photo.id}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                             </button>
                         )) : (
@@ -124,7 +125,7 @@ const PhotosScreen: React.FC = () => {
             {photoSets.length > 0 ? (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {photoSets.map(set => (
-                        <div key={set.id} className="bg-white dark:bg-slate-900 p-4 rounded-2xl shadow-md dark:shadow-black/20 flex flex-col items-center justify-center text-center space-y-3 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                        <div key={set.id} className="bg-white dark:bg-slate-900 p-4 rounded-2xl shadow-md dark:shadow-blue-900/20 flex flex-col items-center justify-center text-center space-y-3 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                             <p className="font-bold text-slate-800 dark:text-slate-200">{set.title}</p>
                             <button onClick={() => handleViewPhotos(set)} className="flex items-center justify-center bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors shadow-md shadow-blue-500/20">
                                 <CameraIcon className="w-5 h-5 ml-2" />

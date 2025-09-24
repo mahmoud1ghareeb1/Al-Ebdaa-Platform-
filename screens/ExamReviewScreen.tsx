@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import type { ExamResult, Question } from '../types';
 import { supabase } from '../lib/supabase';
@@ -50,8 +49,8 @@ const ExamReviewScreen: React.FC<ExamReviewScreenProps> = ({ examResult, onBack 
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-slate-950 flex flex-col">
-      <header className="bg-white dark:bg-slate-900 shadow-sm sticky top-0 z-10 w-full p-4 flex items-center justify-between">
+    <div className="min-h-screen bg-slate-100 dark:bg-sky-950 flex flex-col">
+      <header className="bg-white dark:bg-slate-950 shadow-sm sticky top-0 z-10 w-full p-4 flex items-center justify-between">
         <h1 className="text-lg font-bold text-slate-800 dark:text-slate-200 truncate flex-grow text-right mr-4">{examResult.examName}</h1>
         <button onClick={onBack} className="text-slate-700 dark:text-slate-300 flex-shrink-0">
           <ArrowRightIcon className="w-6 h-6" />
@@ -65,7 +64,7 @@ const ExamReviewScreen: React.FC<ExamReviewScreenProps> = ({ examResult, onBack 
             questions.map((question, index) => (
                 <div key={question.id} className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm">
                     <div className="mb-6 text-right">
-                        <p className="text-sm font-semibold text-blue-600 dark:text-blue-500 mb-2">
+                        <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-2">
                             السؤال {index + 1}
                         </p>
                         <p className="text-lg font-bold text-slate-800 dark:text-slate-200">{question.question_text}</p>

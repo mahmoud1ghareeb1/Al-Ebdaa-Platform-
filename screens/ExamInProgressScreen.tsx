@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import type { Exam, Question } from '../types';
 import { supabase } from '../lib/supabase';
@@ -138,7 +137,7 @@ const ExamInProgressScreen: React.FC<ExamInProgressScreenProps> = ({ exam, onFin
 
   const handlePrev = () => {
     if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(prev => prev - 1);
+      setCurrentQuestionIndex(prev => prev + 1);
     }
   };
 
@@ -167,8 +166,8 @@ const ExamInProgressScreen: React.FC<ExamInProgressScreenProps> = ({ exam, onFin
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-slate-950 flex flex-col">
-      <header className="bg-white dark:bg-slate-900 shadow-sm sticky top-0 z-10 w-full p-4">
+    <div className="min-h-screen bg-slate-100 dark:bg-sky-950 flex flex-col">
+      <header className="bg-white dark:bg-slate-950 shadow-sm sticky top-0 z-10 w-full p-4">
         <div className="flex justify-between items-center max-w-4xl mx-auto">
           <h1 className="text-lg font-bold text-slate-800 dark:text-slate-200 truncate text-right flex-grow mr-4">{exam.name}</h1>
           {exam.duration_minutes && (
@@ -178,14 +177,14 @@ const ExamInProgressScreen: React.FC<ExamInProgressScreenProps> = ({ exam, onFin
           )}
         </div>
         <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 mt-3">
-            <div className="bg-blue-600 dark:bg-blue-500 h-1.5 rounded-full" style={{ width: `${((currentQuestionIndex + 1) / questions.length) * 100}%` }}></div>
+            <div className="bg-blue-600 dark:bg-blue-400 h-1.5 rounded-full" style={{ width: `${((currentQuestionIndex + 1) / questions.length) * 100}%` }}></div>
         </div>
       </header>
 
       <main className="flex-grow p-4 md:p-6 w-full max-w-4xl mx-auto">
         <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm">
             <div className="mb-6 text-right">
-                <p className="text-sm font-semibold text-blue-600 dark:text-blue-500 mb-2">
+                <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-2">
                     السؤال {currentQuestionIndex + 1} من {questions.length}
                 </p>
                 <p className="text-lg font-bold text-slate-800 dark:text-slate-200">{currentQuestion.question_text}</p>

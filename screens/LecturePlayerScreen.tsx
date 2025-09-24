@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import type { Lecture } from '../types';
 import { supabase } from '../lib/supabase';
@@ -67,7 +66,7 @@ const LecturePlayerScreen: React.FC<LecturePlayerScreenProps> = ({ lecture, onBa
   const embedUrl = getYouTubeEmbedUrl(lecture.video_url);
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-black flex flex-col">
+    <div className="min-h-screen bg-slate-100 dark:bg-sky-950 flex flex-col">
       <header className="bg-white dark:bg-slate-950 shadow-sm sticky top-0 z-10 w-full p-4">
          <div className="max-w-4xl mx-auto flex items-center justify-between">
             <h1 className="text-lg font-bold text-slate-800 dark:text-slate-200 truncate flex-grow text-right mr-4">{lecture.title}</h1>

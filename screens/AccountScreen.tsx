@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect, useRef } from 'react';
 import { supabase } from '../lib/supabase';
 import type { StudentProfile } from '../types';
@@ -182,9 +183,9 @@ const AccountScreen: React.FC<{session: Session}> = ({session}) => {
         confirmText="تسجيل الخروج"
       />
       <div ref={accountRef} className="max-w-4xl mx-auto space-y-6">
-          <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-lg dark:shadow-black/20 flex flex-col items-center space-y-4">
+          <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-lg dark:shadow-blue-900/30 flex flex-col items-center space-y-4">
               <div className="relative">
-                <button onClick={triggerAvatarUpload} className="rounded-full border-4 border-slate-200 dark:border-slate-800 block" disabled={uploading}>
+                <button onClick={triggerAvatarUpload} className="rounded-full border-4 border-slate-200 dark:border-blue-800 block" disabled={uploading}>
                     <Avatar src={profile.avatar_url} name={profile.full_name} />
                 </button>
                 {uploading && (
@@ -201,12 +202,12 @@ const AccountScreen: React.FC<{session: Session}> = ({session}) => {
                   onChange={handleAvatarUpload}
                   disabled={uploading}
               />
-              <button onClick={triggerAvatarUpload} disabled={uploading} className="w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors shadow-md shadow-blue-500/20 dark:shadow-lg dark:shadow-blue-500/30 disabled:opacity-50">
+              <button onClick={triggerAvatarUpload} disabled={uploading} className="w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors shadow-md shadow-blue-500/20 dark:shadow-lg dark:shadow-blue-400/30 disabled:opacity-50">
                   {uploading ? 'جاري الرفع...' : 'تغيير صورة الملف الشخصي'}
               </button>
           </div>
           
-          <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-lg dark:shadow-black/20 space-y-4">
+          <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-lg dark:shadow-blue-900/30 space-y-4">
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 sm:space-x-reverse">
                   <InputField label="الاسم" value={profile.full_name} />
                   <InputField label="الكود" value={profile.student_code} />
@@ -224,7 +225,7 @@ const AccountScreen: React.FC<{session: Session}> = ({session}) => {
                   <button
                       onClick={handleSaveCard}
                       disabled={isSaving}
-                      className="w-full bg-green-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-green-700 transition-colors shadow-md shadow-green-500/20 dark:shadow-lg dark:shadow-green-500/30 disabled:opacity-50 disabled:cursor-wait"
+                      className="w-full bg-green-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-green-700 transition-colors shadow-md shadow-green-500/20 dark:shadow-lg dark:shadow-green-400/30 disabled:opacity-50 disabled:cursor-wait"
                   >
                       {isSaving ? 'جاري الحفظ...' : 'حفظ بطاقة الطالب'}
                   </button>

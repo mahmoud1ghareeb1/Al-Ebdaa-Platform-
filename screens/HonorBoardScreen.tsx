@@ -74,16 +74,16 @@ const HonorBoardScreen: React.FC = () => {
   if (loading) return <HonorBoardSkeleton />;
 
   return (
-    <div className="bg-white dark:bg-slate-900 p-4 sm:p-6 rounded-2xl shadow-lg dark:shadow-black/20">
+    <div className="bg-white dark:bg-slate-900 p-4 sm:p-6 rounded-2xl shadow-lg dark:shadow-blue-900/30">
       <h2 className="text-2xl font-bold text-center mb-6 text-slate-800 dark:text-slate-200">لوحة الشرف</h2>
       
-      <div className="flex justify-between items-center text-slate-500 dark:text-slate-400 font-bold px-4 py-2 border-b-2 border-slate-200 dark:border-slate-800">
+      <div className="flex justify-between items-center text-slate-500 dark:text-slate-400 font-bold px-4 py-2 border-b-2 border-slate-200 dark:border-blue-900/50">
         <span>الترتيب</span>
         <span>اسم الطالب</span>
         <span>المجموع</span>
       </div>
       
-      <div className="divide-y divide-slate-100 dark:divide-slate-800">
+      <div className="divide-y divide-slate-100 dark:divide-blue-900/50">
         {students.map((student) => (
           <div key={student.id} className="flex justify-between items-center px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg">
             <div className="flex items-center space-x-2 space-x-reverse w-1/4">
@@ -96,7 +96,7 @@ const HonorBoardScreen: React.FC = () => {
                     <Avatar src={student.avatar_url} name={student.full_name} sizeClass="w-10 h-10" textClass="text-base" />
                 </div>
             </div>
-            <span className="w-1/4 text-left font-bold text-blue-600 dark:text-blue-500">{student.total_score}</span>
+            <span className="w-1/4 text-left font-bold text-blue-600 dark:text-blue-400">{student.total_score}</span>
           </div>
         ))}
       </div>

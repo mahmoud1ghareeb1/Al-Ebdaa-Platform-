@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from 'react';
 import type { Exam } from '../types';
 import { supabase } from '../lib/supabase';
@@ -21,7 +22,7 @@ const ExamCard: React.FC<{ exam: Exam; onStartExam: (exam: Exam) => void; type: 
     };
 
     return (
-        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-md dark:shadow-black/20 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-md dark:shadow-blue-900/20 transition-all duration-300 hover:shadow-xl dark:hover:shadow-blue-700/30 hover:-translate-y-1">
             <div className="flex justify-between items-start">
                 <h3 className="text-lg font-bold text-slate-800 dark:text-slate-200">{exam.name}</h3>
                 {statusPill[type]}
@@ -32,7 +33,7 @@ const ExamCard: React.FC<{ exam: Exam; onStartExam: (exam: Exam) => void; type: 
             </div>
             {type === 'available' && (
                 <div className="mt-4">
-                    <button onClick={() => onStartExam(exam)} className="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition shadow-md shadow-blue-500/20 dark:shadow-lg dark:shadow-blue-500/30">
+                    <button onClick={() => onStartExam(exam)} className="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition shadow-md shadow-blue-500/20 dark:shadow-lg dark:shadow-blue-400/30">
                         بدء الاختبار
                     </button>
                 </div>

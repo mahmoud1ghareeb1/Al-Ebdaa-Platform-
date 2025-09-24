@@ -16,10 +16,10 @@ interface ExamStartScreenProps {
 const InfoCard: React.FC<{ icon: React.ElementType; label: string; value: string | number }> = ({ icon: Icon, label, value }) => (
     <div className="bg-slate-100 dark:bg-slate-900 p-4 rounded-xl flex items-center justify-between">
         <div className="flex items-center space-x-3 space-x-reverse">
-            <Icon className="w-6 h-6 text-blue-600 dark:text-blue-500" />
+            <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
             <span className="font-semibold text-slate-700 dark:text-slate-300">{label}</span>
         </div>
-        <span className="font-bold text-blue-600 dark:text-blue-500">{value}</span>
+        <span className="font-bold text-blue-600 dark:text-blue-400">{value}</span>
     </div>
 );
 
@@ -50,8 +50,8 @@ const ExamStartScreen: React.FC<ExamStartScreenProps> = ({ exam, onStart, onBack
   
   if (loading) {
     return (
-        <div className="min-h-screen bg-slate-100 dark:bg-slate-950 flex flex-col">
-            <header className="bg-white dark:bg-slate-900 shadow-sm p-4 flex items-center justify-between">
+        <div className="min-h-screen bg-slate-100 dark:bg-sky-950 flex flex-col">
+            <header className="bg-white dark:bg-slate-950 shadow-sm p-4 flex items-center justify-between">
                 <h1 className="text-lg font-bold text-slate-800 dark:text-slate-200">جاري تحميل الاختبار...</h1>
                 <button onClick={onBack} className="text-slate-700 dark:text-slate-300"><ArrowRightIcon className="w-6 h-6" /></button>
             </header>
@@ -63,8 +63,8 @@ const ExamStartScreen: React.FC<ExamStartScreenProps> = ({ exam, onStart, onBack
   }
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-slate-950 flex flex-col">
-        <header className="bg-white dark:bg-slate-900 shadow-sm p-4 flex items-center justify-between">
+    <div className="min-h-screen bg-slate-100 dark:bg-sky-950 flex flex-col">
+        <header className="bg-white dark:bg-slate-950 shadow-sm p-4 flex items-center justify-between">
             <h1 className="text-lg font-bold text-slate-800 dark:text-slate-200 truncate flex-grow text-right mr-4">{exam.name}</h1>
             <button onClick={onBack} className="text-slate-700 dark:text-slate-300 flex-shrink-0">
                 <ArrowRightIcon className="w-6 h-6" />
@@ -82,7 +82,7 @@ const ExamStartScreen: React.FC<ExamStartScreenProps> = ({ exam, onStart, onBack
 
                 <button 
                     onClick={() => onStart(exam)}
-                    className="w-full bg-blue-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-blue-500/30 hover:bg-blue-700 transition-transform transform hover:scale-105"
+                    className="w-full bg-blue-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-blue-500/30 dark:shadow-blue-400/30 hover:bg-blue-700 transition-transform transform hover:scale-105"
                 >
                     ابدأ الاختبار الآن
                 </button>

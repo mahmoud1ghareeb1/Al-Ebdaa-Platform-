@@ -25,12 +25,12 @@ const ExamResultsScreen: React.FC<ExamResultsScreenProps> = ({ result, onBackToG
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-slate-950 flex flex-col items-center justify-center p-4 text-center">
-      <div className="w-full max-w-md bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-xl shadow-slate-400/10 dark:shadow-black/20 space-y-6">
+    <div className="min-h-screen bg-slate-100 dark:bg-sky-950 flex flex-col items-center justify-center p-4 text-center">
+      <div className="w-full max-w-md bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-xl shadow-slate-400/10 dark:shadow-blue-900/30 space-y-6">
         <div className="flex justify-center">
             {percentage >= 75 ? 
                 <TrophyIcon className="w-20 h-20 text-amber-400" filled/> : 
-                <CheckCircleIcon className="w-20 h-20 text-blue-500" filled/>
+                <CheckCircleIcon className="w-20 h-20 text-blue-400" filled/>
             }
         </div>
         
@@ -40,12 +40,12 @@ const ExamResultsScreen: React.FC<ExamResultsScreenProps> = ({ result, onBackToG
         <div className="bg-blue-50 dark:bg-slate-800 border-2 border-blue-200 dark:border-slate-700 rounded-xl p-6 space-y-4">
             <div className="flex justify-between items-baseline">
                 <span className="text-slate-600 dark:text-slate-300 font-medium">درجتك النهائية</span>
-                <p className="text-4xl font-extrabold text-blue-600 dark:text-blue-500">
+                <p className="text-4xl font-extrabold text-blue-600 dark:text-blue-400">
                     {score.toFixed(1)}<span className="text-2xl font-bold"> / {exam.total_grade}</span>
                 </p>
             </div>
              <div className="w-full bg-blue-200 dark:bg-slate-700 rounded-full h-4">
-                <div className="bg-blue-600 dark:bg-blue-500 h-4 rounded-full" style={{ width: `${percentage}%` }}></div>
+                <div className="bg-blue-600 dark:bg-blue-400 h-4 rounded-full" style={{ width: `${percentage}%` }}></div>
             </div>
         </div>
 
@@ -61,7 +61,7 @@ const ExamResultsScreen: React.FC<ExamResultsScreenProps> = ({ result, onBackToG
 
         <button
           onClick={onBackToGrades}
-          className="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md shadow-blue-500/20 hover:bg-blue-700 transition-transform transform hover:scale-105"
+          className="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md shadow-blue-500/20 dark:shadow-blue-400/20 hover:bg-blue-700 transition-transform transform hover:scale-105"
         >
           الاطلاع على سجل الدرجات
         </button>
