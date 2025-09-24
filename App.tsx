@@ -148,15 +148,21 @@ const App: React.FC = () => {
       {!isModalScreenActive && <BottomNav activeView={activeView} setActiveView={setActiveView} />}
       {!isModalScreenActive && (
           <Suspense fallback={null}>
-              <ProfileMenuScreen 
-                  isOpen={isMenuOpen} 
-                  onClose={() => setMenuOpen(false)} 
+              <ProfileMenuScreen
+                  isOpen={isMenuOpen}
+                  onClose={() => setMenuOpen(false)}
                   setActiveView={(view) => {
                       setActiveView(view);
                       setMenuOpen(false);
                   }}
               />
           </Suspense>
+      )}
+      {!isModalScreenActive && (
+        <Suspense fallback={null}>
+          {/* Inline import to avoid top-level import affecting bundle splitting */}
+          {React.createElement(require('./components/InstallPromptBanner').default)}
+        </Suspense>
       )}
       </div>
     );
