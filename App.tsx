@@ -6,6 +6,7 @@ import { supabase } from './lib/supabase';
 import type { Session } from '@supabase/supabase-js';
 import type { View, Lecture, Exam, ExamResult } from './types';
 import Spinner from './components/Spinner';
+import InstallPromptBanner from './components/InstallPromptBanner';
 
 // Lazy load screens
 const HomeScreen = React.lazy(() => import('./screens/HomeScreen'));
