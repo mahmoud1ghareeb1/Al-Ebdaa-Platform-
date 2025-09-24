@@ -6,6 +6,7 @@ import { supabase } from './lib/supabase';
 import type { Session } from '@supabase/supabase-js';
 import type { View, Lecture, Exam, ExamResult } from './types';
 import Spinner from './components/Spinner';
+import InstallPromptBanner from './components/InstallPromptBanner';
 
 // Lazy load screens
 const HomeScreen = React.lazy(() => import('./screens/HomeScreen'));
@@ -148,9 +149,9 @@ const App: React.FC = () => {
       {!isModalScreenActive && <BottomNav activeView={activeView} setActiveView={setActiveView} />}
       {!isModalScreenActive && (
           <Suspense fallback={null}>
-              <ProfileMenuScreen 
-                  isOpen={isMenuOpen} 
-                  onClose={() => setMenuOpen(false)} 
+              <ProfileMenuScreen
+                  isOpen={isMenuOpen}
+                  onClose={() => setMenuOpen(false)}
                   setActiveView={(view) => {
                       setActiveView(view);
                       setMenuOpen(false);
@@ -158,6 +159,7 @@ const App: React.FC = () => {
               />
           </Suspense>
       )}
+      {!isModalScreenActive && <InstallPromptBanner />}
       </div>
     );
   };

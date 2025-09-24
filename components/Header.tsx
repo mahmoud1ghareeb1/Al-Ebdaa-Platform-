@@ -21,14 +21,19 @@ const Header: React.FC<HeaderProps> = ({ title, onMenuClick }) => {
             </button>
         </div>
         <h1 className="text-lg font-bold text-zinc-800 dark:text-zinc-200 text-center truncate">{title}</h1>
-        <div className="flex justify-end">
-            <button 
-                onClick={toggleTheme} 
+        <div className="flex justify-end items-center gap-2">
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F44ea46af043947d6ac3e6b970a38b3d7%2Fe5aa813644d74d0390e3497f36ad5e4f?format=png&width=64"
+              alt="شعار منصة الإبداع"
+              className="w-8 h-8 rounded-full object-cover border border-zinc-200 dark:border-zinc-800"
+            />
+            <button
+                onClick={toggleTheme}
                 className="text-zinc-700 dark:text-zinc-300 p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
                 aria-label="Toggle theme"
             >
-                {theme === 'dark' ? 
-                    <SunIcon className="w-6 h-6 text-amber-400" /> : 
+                {theme === 'dark' ?
+                    <SunIcon className="w-6 h-6 text-amber-400" /> :
                     <MoonIcon className="w-6 h-6 text-zinc-700" />
                 }
             </button>
