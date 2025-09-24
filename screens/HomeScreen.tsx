@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import type { Lecture, View, StudentProfile } from '../types';
 import { supabase } from '../lib/supabase';
@@ -86,8 +84,8 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
 
   return (
     <div className="space-y-8">
-      <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-lg shadow-blue-500/5 dark:shadow-blue-900/30 text-center">
-        <p className="text-lg font-bold text-slate-800 dark:text-slate-200">
+      <div className="bg-white dark:bg-zinc-900 p-5 rounded-2xl shadow-lg shadow-blue-500/5 dark:shadow-blue-900/30 text-center">
+        <p className="text-lg font-bold text-zinc-800 dark:text-zinc-200">
           <span className="text-blue-600 dark:text-blue-400">"</span>
           مستقبلك بين يديك، والعلم هو مفتاحك.
           <span className="text-blue-600 dark:text-blue-400">"</span>
@@ -96,14 +94,14 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
 
       <div>
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-slate-800 dark:text-slate-200">الحصص غير المشاهدة</h2>
+          <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-200">الحصص غير المشاهدة</h2>
           <button onClick={() => setActiveView('lectures')} className="flex items-center text-sm text-blue-600 dark:text-blue-400 font-semibold">
             عرض الكل <ChevronLeftIcon />
           </button>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {unwatchedLectures.length > 0 ? unwatchedLectures.map((lecture) => (
-            <div key={lecture.id} className="bg-white dark:bg-slate-900 rounded-2xl shadow-md dark:shadow-blue-900/20 overflow-hidden transition-all duration-300 hover:shadow-xl dark:hover:shadow-blue-700/30 hover:-translate-y-1 cursor-pointer">
+            <div key={lecture.id} className="bg-white dark:bg-zinc-900 rounded-2xl shadow-md dark:shadow-blue-900/20 overflow-hidden transition-all duration-300 hover:shadow-xl dark:hover:shadow-blue-700/30 hover:-translate-y-1 cursor-pointer">
               <div className="relative">
                 <img src={lecture.thumbnail_url} alt={lecture.title} className="w-full h-32 object-cover" />
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
@@ -111,26 +109,26 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
                 </div>
               </div>
               <div className="p-3">
-                <h3 className="font-bold text-slate-800 dark:text-slate-200 text-sm truncate">{lecture.title}</h3>
-                <div className="flex items-center text-xs text-slate-500 dark:text-slate-400 mt-2">
-                  <CheckCircleIcon className="w-4 h-4 ml-1 text-slate-400 dark:text-slate-500" />
+                <h3 className="font-bold text-zinc-800 dark:text-zinc-200 text-sm truncate">{lecture.title}</h3>
+                <div className="flex items-center text-xs text-zinc-500 dark:text-zinc-400 mt-2">
+                  <CheckCircleIcon className="w-4 h-4 ml-1 text-zinc-400 dark:text-zinc-500" />
                   <span>لم تتم المشاهدة</span>
                 </div>
               </div>
             </div>
-          )) : <p className="text-center text-slate-500 dark:text-slate-400 w-full py-8 col-span-full">لقد شاهدت جميع الحصص!</p>}
+          )) : <p className="text-center text-zinc-500 dark:text-zinc-400 w-full py-8 col-span-full">لقد شاهدت جميع الحصص!</p>}
         </div>
       </div>
       
       {student && (
-      <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-lg shadow-blue-500/5 dark:shadow-blue-900/30">
+      <div className="bg-white dark:bg-zinc-900 p-5 rounded-2xl shadow-lg shadow-blue-500/5 dark:shadow-blue-900/30">
         <div className="flex items-start justify-between">
             <div>
-                <h3 className="text-lg font-bold text-slate-800 dark:text-slate-200">مستواك العام حسب متوسط دفعتك</h3>
-                <p className="text-sm text-slate-600 dark:text-slate-300 mt-2">
+                <h3 className="text-lg font-bold text-zinc-800 dark:text-zinc-200">مستواك العام حسب متوسط دفعتك</h3>
+                <p className="text-sm text-zinc-600 dark:text-zinc-300 mt-2">
                     يا {student.full_name?.split(' ')[0] || 'طالبنا'}! جيد جدًا! {student.rank > 0 ? `ترتيبك هو ${student.rank}.` : 'ليس لديك ترتيب بعد.'} استمر في العمل الجاد لتصل إلى هدفك.
                 </p>
-                 <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">مؤشر أدائك:</p>
+                 <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">مؤشر أدائك:</p>
             </div>
             <div className="relative">
                 <div className="w-2 h-2 rounded-full bg-red-500 absolute -top-1 -right-1 animate-ping"></div>
@@ -138,7 +136,7 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
                 <TrophyIcon className="w-6 h-6 text-amber-400" filled />
             </div>
         </div>
-        <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2.5 mt-3">
+        <div className="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-2.5 mt-3">
           <div className="bg-blue-600 dark:bg-blue-500 h-2.5 rounded-full" style={{ width: `${performancePercentage}%` }}></div>
         </div>
          <p className="text-left text-sm font-bold text-blue-600 dark:text-blue-400 mt-1">{performancePercentage}%</p>
@@ -147,9 +145,9 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {gridItems.map((item) => (
-          <button key={item.label} onClick={() => setActiveView(item.view)} className="bg-white dark:bg-slate-900 p-4 rounded-2xl shadow-md dark:shadow-blue-900/20 flex flex-col items-center justify-center space-y-2 text-center transition-all duration-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:shadow-xl hover:-translate-y-1">
+          <button key={item.label} onClick={() => setActiveView(item.view)} className="bg-white dark:bg-zinc-900 p-4 rounded-2xl shadow-md dark:shadow-blue-900/20 flex flex-col items-center justify-center space-y-2 text-center transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:shadow-xl hover:-translate-y-1">
             <item.icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
-            <span className="font-semibold text-slate-700 dark:text-slate-300">{item.label}</span>
+            <span className="font-semibold text-zinc-700 dark:text-zinc-300">{item.label}</span>
           </button>
         ))}
       </div>

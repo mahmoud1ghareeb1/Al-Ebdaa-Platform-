@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import type { Lecture } from '../types';
 import { supabase } from '../lib/supabase';
@@ -7,7 +6,7 @@ import PlayIcon from '../components/icons/PlayIcon';
 import { LectureCardSkeleton } from '../components/Skeletons';
 
 const LectureCard: React.FC<{ lecture: Lecture; onSelect: (lecture: Lecture) => void }> = ({ lecture, onSelect }) => (
-  <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-md dark:shadow-blue-900/20 overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-xl dark:hover:shadow-blue-700/30 hover:-translate-y-1" onClick={() => onSelect(lecture)}>
+  <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-md dark:shadow-blue-900/20 overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-xl dark:hover:shadow-blue-700/30 hover:-translate-y-1" onClick={() => onSelect(lecture)}>
     <div className="relative group">
       <img src={lecture.thumbnail_url} alt={lecture.title} className="w-full h-40 object-cover" />
        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -15,8 +14,8 @@ const LectureCard: React.FC<{ lecture: Lecture; onSelect: (lecture: Lecture) => 
         </div>
     </div>
     <div className="p-4">
-      <h3 className="font-bold text-slate-800 dark:text-slate-200 truncate">{lecture.title}</h3>
-      <div className={`flex items-center text-xs mt-3 ${lecture.watched ? 'text-green-600 dark:text-green-400' : 'text-slate-500 dark:text-slate-400'}`}>
+      <h3 className="font-bold text-zinc-800 dark:text-zinc-200 truncate">{lecture.title}</h3>
+      <div className={`flex items-center text-xs mt-3 ${lecture.watched ? 'text-green-600 dark:text-green-400' : 'text-zinc-500 dark:text-zinc-400'}`}>
         <CheckCircleIcon className="w-4 h-4 ml-1" filled={lecture.watched} />
         <span>{lecture.watched ? 'تمت المشاهدة' : 'لم تتم المشاهدة'}</span>
       </div>

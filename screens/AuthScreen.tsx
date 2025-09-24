@@ -95,28 +95,28 @@ const AuthScreen: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-sky-950 flex flex-col justify-center items-center p-4">
+    <div className="min-h-screen bg-zinc-100 dark:bg-zinc-950 flex flex-col justify-center items-center p-4">
        <div className="absolute top-4 right-4 z-10">
             <button 
                 onClick={toggleTheme} 
-                className="text-slate-700 dark:text-slate-300 p-2 rounded-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                className="text-zinc-700 dark:text-zinc-300 p-2 rounded-full bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
                 aria-label="Toggle theme"
             >
                 {theme === 'dark' ? 
                     <SunIcon className="w-6 h-6 text-amber-400" /> : 
-                    <MoonIcon className="w-6 h-6 text-slate-700" />
+                    <MoonIcon className="w-6 h-6 text-zinc-700" />
                 }
             </button>
         </div>
-      <div className="w-full max-w-sm mx-auto bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-lg shadow-slate-400/10 dark:shadow-blue-900/30">
+      <div className="w-full max-w-sm mx-auto bg-white dark:bg-zinc-900 p-8 rounded-2xl shadow-lg shadow-zinc-400/10 dark:shadow-blue-900/30">
         <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-200">منصة الإبداع</h1>
-            <p className="text-slate-500 dark:text-slate-400 mt-2">{isSignUp ? 'إنشاء حساب جديد' : 'تسجيل الدخول للمتابعة'}</p>
+            <h1 className="text-2xl font-bold text-zinc-800 dark:text-zinc-200">منصة الإبداع</h1>
+            <p className="text-zinc-500 dark:text-zinc-400 mt-2">{isSignUp ? 'إنشاء حساب جديد' : 'تسجيل الدخول للمتابعة'}</p>
         </div>
         <form onSubmit={isSignUp ? handleSignUp : handleLogin} className="space-y-4">
           {formFields.map(field => (
              <div key={field.id}>
-                <label htmlFor={field.id} className="block text-sm font-medium text-slate-700 dark:text-slate-300 text-right">
+                <label htmlFor={field.id} className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 text-right">
                   {field.label}
                 </label>
                 <div className="mt-1">
@@ -128,7 +128,7 @@ const AuthScreen: React.FC = () => {
                     required
                     value={field.value}
                     onChange={(e) => field.setter(e.target.value)}
-                    className="appearance-none block w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-right bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100"
+                    className="appearance-none block w-full px-3 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md shadow-sm placeholder-zinc-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-right bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
                   />
                 </div>
               </div>
@@ -138,21 +138,21 @@ const AuthScreen: React.FC = () => {
             <>
               {signUpFields.map(field => (
                   <div key={field.id}>
-                    <label htmlFor={field.id} className="block text-sm font-medium text-slate-700 dark:text-slate-300 text-right">{field.label}</label>
-                    <input id={field.id} type={field.type} value={field.value} onChange={(e) => field.setter(e.target.value)} required className="mt-1 appearance-none block w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-right bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100"/>
+                    <label htmlFor={field.id} className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 text-right">{field.label}</label>
+                    <input id={field.id} type={field.type} value={field.value} onChange={(e) => field.setter(e.target.value)} required className="mt-1 appearance-none block w-full px-3 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md shadow-sm placeholder-zinc-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-right bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"/>
                   </div>
               ))}
               <div>
-                <label htmlFor="studentClass" className="block text-sm font-medium text-slate-700 dark:text-slate-300 text-right">الصف الدراسي</label>
-                <select id="studentClass" value={studentClass} onChange={(e) => setStudentClass(e.target.value as any)} required className="mt-1 block w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-right">
+                <label htmlFor="studentClass" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 text-right">الصف الدراسي</label>
+                <select id="studentClass" value={studentClass} onChange={(e) => setStudentClass(e.target.value as any)} required className="mt-1 block w-full px-3 py-2 border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-right">
                     <option>الصف الثالث الثانوى</option>
                     <option>الصف الثانى الثانوى</option>
                     <option>الصف الأول الثانوى</option>
                 </select>
               </div>
               <div>
-                <label htmlFor="group" className="block text-sm font-medium text-slate-700 dark:text-slate-300 text-right">المجموعة</label>
-                <select id="group" value={group} onChange={(e) => setGroup(e.target.value as any)} required className="mt-1 block w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-right">
+                <label htmlFor="group" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 text-right">المجموعة</label>
+                <select id="group" value={group} onChange={(e) => setGroup(e.target.value as any)} required className="mt-1 block w-full px-3 py-2 border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-right">
                     <option>مجموعة 1</option>
                     <option>مجموعة 2</option>
                     <option>ابو حماد</option>

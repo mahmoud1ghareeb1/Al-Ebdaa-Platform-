@@ -148,14 +148,14 @@ const ExamInProgressScreen: React.FC<ExamInProgressScreenProps> = ({ exam, onFin
   };
 
   if (loading) {
-    return <div className="min-h-screen bg-slate-100 dark:bg-slate-950 flex items-center justify-center"><Spinner /></div>;
+    return <div className="min-h-screen bg-zinc-100 dark:bg-zinc-950 flex items-center justify-center"><Spinner /></div>;
   }
   
   if (questions.length === 0) {
     return (
-        <div className="min-h-screen bg-slate-100 dark:bg-slate-950 flex flex-col items-center justify-center p-4 text-center">
-            <h2 className="text-xl font-bold text-slate-800 dark:text-slate-200">لا توجد أسئلة</h2>
-            <p className="text-slate-600 dark:text-slate-400 my-4">لا توجد أسئلة متاحة لهذا الاختبار حاليًا.</p>
+        <div className="min-h-screen bg-zinc-100 dark:bg-zinc-950 flex flex-col items-center justify-center p-4 text-center">
+            <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-200">لا توجد أسئلة</h2>
+            <p className="text-zinc-600 dark:text-zinc-400 my-4">لا توجد أسئلة متاحة لهذا الاختبار حاليًا.</p>
             <button onClick={handleSubmit} className="bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg">
                 العودة
             </button>
@@ -166,28 +166,28 @@ const ExamInProgressScreen: React.FC<ExamInProgressScreenProps> = ({ exam, onFin
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-sky-950 flex flex-col">
-      <header className="bg-white dark:bg-slate-950 shadow-sm sticky top-0 z-10 w-full p-4">
+    <div className="min-h-screen bg-zinc-100 dark:bg-zinc-950 flex flex-col">
+      <header className="bg-white dark:bg-zinc-950 shadow-sm sticky top-0 z-10 w-full p-4">
         <div className="flex justify-between items-center max-w-4xl mx-auto">
-          <h1 className="text-lg font-bold text-slate-800 dark:text-slate-200 truncate text-right flex-grow mr-4">{exam.name}</h1>
+          <h1 className="text-lg font-bold text-zinc-800 dark:text-zinc-200 truncate text-right flex-grow mr-4">{exam.name}</h1>
           {exam.duration_minutes && (
             <div className="font-mono text-lg font-bold bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-400 px-3 py-1 rounded-md">
                 {formatTime(timeLeft)}
             </div>
           )}
         </div>
-        <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 mt-3">
+        <div className="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-1.5 mt-3">
             <div className="bg-blue-600 dark:bg-blue-400 h-1.5 rounded-full" style={{ width: `${((currentQuestionIndex + 1) / questions.length) * 100}%` }}></div>
         </div>
       </header>
 
       <main className="flex-grow p-4 md:p-6 w-full max-w-4xl mx-auto">
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm">
+        <div className="bg-white dark:bg-zinc-900 p-6 rounded-2xl shadow-sm">
             <div className="mb-6 text-right">
                 <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-2">
                     السؤال {currentQuestionIndex + 1} من {questions.length}
                 </p>
-                <p className="text-lg font-bold text-slate-800 dark:text-slate-200">{currentQuestion.question_text}</p>
+                <p className="text-lg font-bold text-zinc-800 dark:text-zinc-200">{currentQuestion.question_text}</p>
             </div>
             {currentQuestion.question_image_url && (
                 <div className="my-4 flex justify-center">
@@ -199,10 +199,10 @@ const ExamInProgressScreen: React.FC<ExamInProgressScreenProps> = ({ exam, onFin
                     <button
                         key={option.id}
                         onClick={() => handleAnswerSelect(currentQuestion.id, option.id)}
-                        className={`w-full text-right p-4 rounded-lg border-2 transition-all duration-200 text-slate-700 dark:text-slate-200 font-medium
+                        className={`w-full text-right p-4 rounded-lg border-2 transition-all duration-200 text-zinc-700 dark:text-zinc-200 font-medium
                         ${answers[currentQuestion.id] === option.id 
                             ? 'bg-blue-100 dark:bg-blue-950/60 border-blue-500 dark:border-blue-500 ring-2 ring-blue-500/50' 
-                            : 'bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:bg-slate-100 hover:border-slate-300 dark:hover:bg-slate-700'}`}
+                            : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 hover:border-zinc-300 dark:hover:bg-zinc-700'}`}
                     >
                         {option.option_text}
                     </button>
@@ -211,12 +211,12 @@ const ExamInProgressScreen: React.FC<ExamInProgressScreenProps> = ({ exam, onFin
         </div>
       </main>
       
-      <footer className="bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm shadow-top sticky bottom-0 z-10 w-full p-4 border-t border-slate-200 dark:border-slate-800">
+      <footer className="bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm shadow-top sticky bottom-0 z-10 w-full p-4 border-t border-zinc-200 dark:border-zinc-800">
         <div className="flex justify-between items-center max-w-4xl mx-auto">
              <button
                 onClick={handlePrev}
                 disabled={currentQuestionIndex === 0}
-                className="py-2 px-6 rounded-lg font-semibold bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="py-2 px-6 rounded-lg font-semibold bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed"
             >
                 السابق
             </button>

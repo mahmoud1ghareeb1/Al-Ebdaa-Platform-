@@ -128,7 +128,7 @@ const App: React.FC = () => {
 
   const renderApp = () => {
     if (loading) {
-      return <div className="min-h-screen bg-slate-100 dark:bg-sky-950 flex justify-center items-center"><p>Loading...</p></div>;
+      return <div className="min-h-screen bg-zinc-100 dark:bg-zinc-950 flex justify-center items-center"><p>Loading...</p></div>;
     }
     
     if (!session) {
@@ -138,7 +138,7 @@ const App: React.FC = () => {
     const isModalScreenActive = !!(playingLecture || startingExam || activeExam || examResult || reviewingExam);
 
     return (
-      <div className="min-h-screen bg-slate-100 dark:bg-sky-950 flex flex-col">
+      <div className="min-h-screen bg-zinc-100 dark:bg-zinc-950 flex flex-col">
       {!isModalScreenActive && <Header title={viewTitles[activeView]} onMenuClick={() => setMenuOpen(true)} />}
       <main className={`flex-grow overflow-y-auto ${!isModalScreenActive ? 'pb-24 px-4 md:px-6 pt-4' : ''}`}>
           <Suspense fallback={<Spinner />}>

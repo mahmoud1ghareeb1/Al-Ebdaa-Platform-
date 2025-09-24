@@ -27,8 +27,8 @@ const ThemeToggle: React.FC = () => {
     return (
         <button
             onClick={toggleTheme}
-            className={`relative inline-flex h-8 w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent p-1 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900 ${
-            theme === 'dark' ? 'bg-blue-600' : 'bg-slate-300'
+            className={`relative inline-flex h-8 w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent p-1 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-900 ${
+            theme === 'dark' ? 'bg-blue-600' : 'bg-zinc-300'
             }`}
             aria-label="Toggle dark mode"
         >
@@ -112,21 +112,21 @@ const ProfileMenuScreen: React.FC<ProfileMenuProps> = ({ isOpen, onClose, setAct
       />
       <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={onClose}>
         <div className="fixed inset-0 flex justify-center items-center p-4" onClick={(e) => e.stopPropagation()}>
-          <div className="bg-white dark:bg-slate-900 rounded-2xl w-full max-w-sm p-6 relative flex flex-col items-center space-y-4">
-              <button onClick={onClose} className="absolute top-4 left-4 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">
+          <div className="bg-white dark:bg-zinc-900 rounded-2xl w-full max-w-sm p-6 relative flex flex-col items-center space-y-4">
+              <button onClick={onClose} className="absolute top-4 left-4 text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200">
                   <XIcon />
               </button>
-              <div className="border-4 border-slate-200 dark:border-blue-800 rounded-full overflow-hidden">
+              <div className="border-4 border-zinc-200 dark:border-zinc-700 rounded-full overflow-hidden">
                 <Avatar src={profile?.avatar_url} name={profile?.full_name} />
               </div>
-              <h2 className="text-xl font-bold text-slate-800 dark:text-slate-200">{profile?.full_name || '...'}</h2>
+              <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-200">{profile?.full_name || '...'}</h2>
               
               <div className="w-full space-y-2 pt-4">
                   {menuItems.map(item => (
                       <button 
                           key={item.label}
                           onClick={() => setActiveView(item.view)}
-                          className={`w-full flex items-center justify-end space-x-3 space-x-reverse text-right p-3 rounded-lg font-semibold transition-colors ${item.highlight ? 'bg-blue-100 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'}`}
+                          className={`w-full flex items-center justify-end space-x-3 space-x-reverse text-right p-3 rounded-lg font-semibold transition-colors ${item.highlight ? 'bg-blue-100 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300' : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'}`}
                       >
                          <span>{item.label}</span>
                          <item.icon className="w-6 h-6" />
@@ -139,7 +139,7 @@ const ProfileMenuScreen: React.FC<ProfileMenuProps> = ({ isOpen, onClose, setAct
                  <LogoutIcon className="w-6 h-6" />
               </button>
 
-               <div className="flex items-center justify-center w-full pt-4 border-t border-slate-200 dark:border-blue-900/50 mt-2">
+               <div className="flex items-center justify-center w-full pt-4 border-t border-zinc-200 dark:border-zinc-800 mt-2">
                   <ThemeToggle />
               </div>
           </div>

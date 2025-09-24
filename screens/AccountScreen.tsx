@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect, useRef } from 'react';
 import { supabase } from '../lib/supabase';
 import type { StudentProfile } from '../types';
@@ -13,12 +11,12 @@ declare const html2canvas: any;
 
 const InputField: React.FC<{ label: string; value: string; readOnly?: boolean }> = ({ label, value, readOnly = true }) => (
     <div className="w-full">
-        <label className="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1 text-right">{label}</label>
+        <label className="block text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-1 text-right">{label}</label>
         <input 
             type="text" 
             value={value || ''} 
             readOnly={readOnly}
-            className="w-full bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 border rounded-lg p-2.5 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right" 
+            className="w-full bg-zinc-100 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 border rounded-lg p-2.5 text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right" 
         />
     </div>
 );
@@ -183,9 +181,9 @@ const AccountScreen: React.FC<{session: Session}> = ({session}) => {
         confirmText="تسجيل الخروج"
       />
       <div ref={accountRef} className="max-w-4xl mx-auto space-y-6">
-          <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-lg dark:shadow-blue-900/30 flex flex-col items-center space-y-4">
+          <div className="bg-white dark:bg-zinc-900 p-6 rounded-2xl shadow-lg dark:shadow-blue-900/30 flex flex-col items-center space-y-4">
               <div className="relative">
-                <button onClick={triggerAvatarUpload} className="rounded-full border-4 border-slate-200 dark:border-blue-800 block" disabled={uploading}>
+                <button onClick={triggerAvatarUpload} className="rounded-full border-4 border-zinc-200 dark:border-zinc-700 block" disabled={uploading}>
                     <Avatar src={profile.avatar_url} name={profile.full_name} />
                 </button>
                 {uploading && (
@@ -207,7 +205,7 @@ const AccountScreen: React.FC<{session: Session}> = ({session}) => {
               </button>
           </div>
           
-          <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-lg dark:shadow-blue-900/30 space-y-4">
+          <div className="bg-white dark:bg-zinc-900 p-6 rounded-2xl shadow-lg dark:shadow-blue-900/30 space-y-4">
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 sm:space-x-reverse">
                   <InputField label="الاسم" value={profile.full_name} />
                   <InputField label="الكود" value={profile.student_code} />

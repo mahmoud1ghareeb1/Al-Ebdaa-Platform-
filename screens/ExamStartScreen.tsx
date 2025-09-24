@@ -14,10 +14,10 @@ interface ExamStartScreenProps {
 }
 
 const InfoCard: React.FC<{ icon: React.ElementType; label: string; value: string | number }> = ({ icon: Icon, label, value }) => (
-    <div className="bg-slate-100 dark:bg-slate-900 p-4 rounded-xl flex items-center justify-between">
+    <div className="bg-zinc-100 dark:bg-zinc-900 p-4 rounded-xl flex items-center justify-between">
         <div className="flex items-center space-x-3 space-x-reverse">
             <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-            <span className="font-semibold text-slate-700 dark:text-slate-300">{label}</span>
+            <span className="font-semibold text-zinc-700 dark:text-zinc-300">{label}</span>
         </div>
         <span className="font-bold text-blue-600 dark:text-blue-400">{value}</span>
     </div>
@@ -50,10 +50,10 @@ const ExamStartScreen: React.FC<ExamStartScreenProps> = ({ exam, onStart, onBack
   
   if (loading) {
     return (
-        <div className="min-h-screen bg-slate-100 dark:bg-sky-950 flex flex-col">
-            <header className="bg-white dark:bg-slate-950 shadow-sm p-4 flex items-center justify-between">
-                <h1 className="text-lg font-bold text-slate-800 dark:text-slate-200">جاري تحميل الاختبار...</h1>
-                <button onClick={onBack} className="text-slate-700 dark:text-slate-300"><ArrowRightIcon className="w-6 h-6" /></button>
+        <div className="min-h-screen bg-zinc-100 dark:bg-zinc-950 flex flex-col">
+            <header className="bg-white dark:bg-zinc-950 shadow-sm p-4 flex items-center justify-between">
+                <h1 className="text-lg font-bold text-zinc-800 dark:text-zinc-200">جاري تحميل الاختبار...</h1>
+                <button onClick={onBack} className="text-zinc-700 dark:text-zinc-300"><ArrowRightIcon className="w-6 h-6" /></button>
             </header>
             <main className="flex-grow flex items-center justify-center">
                 <Spinner />
@@ -63,17 +63,17 @@ const ExamStartScreen: React.FC<ExamStartScreenProps> = ({ exam, onStart, onBack
   }
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-sky-950 flex flex-col">
-        <header className="bg-white dark:bg-slate-950 shadow-sm p-4 flex items-center justify-between">
-            <h1 className="text-lg font-bold text-slate-800 dark:text-slate-200 truncate flex-grow text-right mr-4">{exam.name}</h1>
-            <button onClick={onBack} className="text-slate-700 dark:text-slate-300 flex-shrink-0">
+    <div className="min-h-screen bg-zinc-100 dark:bg-zinc-950 flex flex-col">
+        <header className="bg-white dark:bg-zinc-950 shadow-sm p-4 flex items-center justify-between">
+            <h1 className="text-lg font-bold text-zinc-800 dark:text-zinc-200 truncate flex-grow text-right mr-4">{exam.name}</h1>
+            <button onClick={onBack} className="text-zinc-700 dark:text-zinc-300 flex-shrink-0">
                 <ArrowRightIcon className="w-6 h-6" />
             </button>
         </header>
         <main className="flex-grow p-6 flex flex-col justify-center items-center text-center">
             <div className="w-full max-w-md">
-                <h2 className="text-2xl font-extrabold text-slate-800 dark:text-slate-200 mb-2">تعليمات الاختبار</h2>
-                <p className="text-slate-600 dark:text-slate-400 mb-8">اقرأ التفاصيل التالية جيدًا قبل البدء.</p>
+                <h2 className="text-2xl font-extrabold text-zinc-800 dark:text-zinc-200 mb-2">تعليمات الاختبار</h2>
+                <p className="text-zinc-600 dark:text-zinc-400 mb-8">اقرأ التفاصيل التالية جيدًا قبل البدء.</p>
                 <div className="space-y-4 text-right mb-10">
                     <InfoCard icon={ClockIcon} label="مدة الاختبار" value={`${exam.duration_minutes || 'غير محدد'} دقيقة`} />
                     <InfoCard icon={QuestionMarkCircleIcon} label="عدد الأسئلة" value={questionCount ?? '...'} />

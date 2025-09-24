@@ -25,8 +25,8 @@ const ExamResultsScreen: React.FC<ExamResultsScreenProps> = ({ result, onBackToG
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-sky-950 flex flex-col items-center justify-center p-4 text-center">
-      <div className="w-full max-w-md bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-xl shadow-slate-400/10 dark:shadow-blue-900/30 space-y-6">
+    <div className="min-h-screen bg-zinc-100 dark:bg-zinc-950 flex flex-col items-center justify-center p-4 text-center">
+      <div className="w-full max-w-md bg-white dark:bg-zinc-900 p-8 rounded-2xl shadow-xl shadow-zinc-400/10 dark:shadow-blue-900/30 space-y-6">
         <div className="flex justify-center">
             {percentage >= 75 ? 
                 <TrophyIcon className="w-20 h-20 text-amber-400" filled/> : 
@@ -34,28 +34,28 @@ const ExamResultsScreen: React.FC<ExamResultsScreenProps> = ({ result, onBackToG
             }
         </div>
         
-        <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-200">اكتمل الاختبار!</h1>
-        <p className="text-lg text-slate-600 dark:text-slate-300">هذه هي نتيجتك في اختبار: <span className="font-bold">{exam.name}</span></p>
+        <h1 className="text-2xl font-bold text-zinc-800 dark:text-zinc-200">اكتمل الاختبار!</h1>
+        <p className="text-lg text-zinc-600 dark:text-zinc-300">هذه هي نتيجتك في اختبار: <span className="font-bold">{exam.name}</span></p>
 
-        <div className="bg-blue-50 dark:bg-slate-800 border-2 border-blue-200 dark:border-slate-700 rounded-xl p-6 space-y-4">
+        <div className="bg-blue-50 dark:bg-zinc-800 border-2 border-blue-200 dark:border-zinc-700 rounded-xl p-6 space-y-4">
             <div className="flex justify-between items-baseline">
-                <span className="text-slate-600 dark:text-slate-300 font-medium">درجتك النهائية</span>
+                <span className="text-zinc-600 dark:text-zinc-300 font-medium">درجتك النهائية</span>
                 <p className="text-4xl font-extrabold text-blue-600 dark:text-blue-400">
                     {score.toFixed(1)}<span className="text-2xl font-bold"> / {exam.total_grade}</span>
                 </p>
             </div>
-             <div className="w-full bg-blue-200 dark:bg-slate-700 rounded-full h-4">
+             <div className="w-full bg-blue-200 dark:bg-zinc-700 rounded-full h-4">
                 <div className="bg-blue-600 dark:bg-blue-400 h-4 rounded-full" style={{ width: `${percentage}%` }}></div>
             </div>
         </div>
 
-        <div className="text-md text-slate-700 dark:text-slate-300">
+        <div className="text-md text-zinc-700 dark:text-zinc-300">
             <p>لقد أجبت بشكل صحيح على <span className="font-bold text-green-600 dark:text-green-400">{correctAnswers}</span> من أصل <span className="font-bold">{totalQuestions}</span> أسئلة.</p>
         </div>
 
-        <p className="text-lg font-semibold text-slate-800 dark:text-slate-200">{getMotivationalMessage()}</p>
+        <p className="text-lg font-semibold text-zinc-800 dark:text-zinc-200">{getMotivationalMessage()}</p>
         
-        <div className="text-sm text-slate-500 dark:text-slate-400">
+        <div className="text-sm text-zinc-500 dark:text-zinc-400">
             <p>ملاحظة: ستظهر نتيجتك في سجل الدرجات الخاص بك بعد انتهاء الموعد النهائي للاختبار للجميع.</p>
         </div>
 

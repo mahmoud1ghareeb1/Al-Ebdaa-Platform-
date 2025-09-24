@@ -41,18 +41,18 @@ const ExamReviewScreen: React.FC<ExamReviewScreenProps> = ({ examResult, onBack 
   }, [examResult.exam_id]);
   
   const getOptionClassName = (isCorrect: boolean) => {
-    let baseClasses = 'w-full text-right p-4 rounded-lg border-2 transition-all duration-200 text-slate-700 dark:text-slate-200 font-medium flex items-center justify-between';
+    let baseClasses = 'w-full text-right p-4 rounded-lg border-2 transition-all duration-200 text-zinc-700 dark:text-zinc-200 font-medium flex items-center justify-between';
     if (isCorrect) {
       return `${baseClasses} bg-green-50 dark:bg-green-950/50 border-green-400 dark:border-green-700`;
     }
-    return `${baseClasses} bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700`;
+    return `${baseClasses} bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700`;
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-sky-950 flex flex-col">
-      <header className="bg-white dark:bg-slate-950 shadow-sm sticky top-0 z-10 w-full p-4 flex items-center justify-between">
-        <h1 className="text-lg font-bold text-slate-800 dark:text-slate-200 truncate flex-grow text-right mr-4">{examResult.examName}</h1>
-        <button onClick={onBack} className="text-slate-700 dark:text-slate-300 flex-shrink-0">
+    <div className="min-h-screen bg-zinc-100 dark:bg-zinc-950 flex flex-col">
+      <header className="bg-white dark:bg-zinc-950 shadow-sm sticky top-0 z-10 w-full p-4 flex items-center justify-between">
+        <h1 className="text-lg font-bold text-zinc-800 dark:text-zinc-200 truncate flex-grow text-right mr-4">{examResult.examName}</h1>
+        <button onClick={onBack} className="text-zinc-700 dark:text-zinc-300 flex-shrink-0">
           <ArrowRightIcon className="w-6 h-6" />
         </button>
       </header>
@@ -62,12 +62,12 @@ const ExamReviewScreen: React.FC<ExamReviewScreenProps> = ({ examResult, onBack 
             <div className="flex justify-center items-center h-64"><Spinner /></div>
         ) : questions.length > 0 ? (
             questions.map((question, index) => (
-                <div key={question.id} className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm">
+                <div key={question.id} className="bg-white dark:bg-zinc-900 p-6 rounded-2xl shadow-sm">
                     <div className="mb-6 text-right">
                         <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-2">
                             السؤال {index + 1}
                         </p>
-                        <p className="text-lg font-bold text-slate-800 dark:text-slate-200">{question.question_text}</p>
+                        <p className="text-lg font-bold text-zinc-800 dark:text-zinc-200">{question.question_text}</p>
                     </div>
                     {question.question_image_url && (
                         <div className="my-4 flex justify-center">
@@ -85,9 +85,9 @@ const ExamReviewScreen: React.FC<ExamReviewScreenProps> = ({ examResult, onBack 
                 </div>
             ))
         ) : (
-            <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-sm text-center">
-                <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200">لا توجد أسئلة</h3>
-                <p className="text-slate-600 dark:text-slate-400 mt-2">لم يتم العثور على أسئلة لهذا الاختبار.</p>
+            <div className="bg-white dark:bg-zinc-900 p-8 rounded-2xl shadow-sm text-center">
+                <h3 className="text-xl font-bold text-zinc-800 dark:text-zinc-200">لا توجد أسئلة</h3>
+                <p className="text-zinc-600 dark:text-zinc-400 mt-2">لم يتم العثور على أسئلة لهذا الاختبار.</p>
             </div>
         )}
       </main>

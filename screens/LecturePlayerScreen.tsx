@@ -66,11 +66,11 @@ const LecturePlayerScreen: React.FC<LecturePlayerScreenProps> = ({ lecture, onBa
   const embedUrl = getYouTubeEmbedUrl(lecture.video_url);
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-sky-950 flex flex-col">
-      <header className="bg-white dark:bg-slate-950 shadow-sm sticky top-0 z-10 w-full p-4">
+    <div className="min-h-screen bg-zinc-100 dark:bg-zinc-950 flex flex-col">
+      <header className="bg-white dark:bg-zinc-950 shadow-sm sticky top-0 z-10 w-full p-4">
          <div className="max-w-4xl mx-auto flex items-center justify-between">
-            <h1 className="text-lg font-bold text-slate-800 dark:text-slate-200 truncate flex-grow text-right mr-4">{lecture.title}</h1>
-            <button onClick={onBack} className="text-slate-700 dark:text-slate-300 flex-shrink-0">
+            <h1 className="text-lg font-bold text-zinc-800 dark:text-zinc-200 truncate flex-grow text-right mr-4">{lecture.title}</h1>
+            <button onClick={onBack} className="text-zinc-700 dark:text-zinc-300 flex-shrink-0">
               <ArrowRightIcon className="w-6 h-6" />
             </button>
         </div>
@@ -89,18 +89,18 @@ const LecturePlayerScreen: React.FC<LecturePlayerScreenProps> = ({ lecture, onBa
               className="w-full h-full"
             ></iframe>
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-slate-800 text-white p-4 text-center">
+            <div className="w-full h-full flex items-center justify-center bg-zinc-800 text-white p-4 text-center">
               <p>رابط الفيديو غير صالح أو غير متوفر.</p>
             </div>
           )}
         </div>
         
-        <div className="p-6 bg-white dark:bg-slate-950">
-          <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-200 mb-3 text-right">{lecture.title}</h2>
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-right">
+        <div className="p-6 bg-white dark:bg-zinc-950">
+          <h2 className="text-2xl font-bold text-zinc-800 dark:text-zinc-200 mb-3 text-right">{lecture.title}</h2>
+          <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed text-right">
             هنا وصف تفصيلي للمحاضرة. يمكنك التركيز على النقاط الرئيسية التي تم تغطيتها في الفيديو لفهم أفضل. استمتع بالمشاهدة!
           </p>
-          <div className="mt-6 border-t border-slate-200 dark:border-slate-800 pt-4 flex items-center text-green-600 dark:text-green-400">
+          <div className="mt-6 border-t border-zinc-200 dark:border-zinc-800 pt-4 flex items-center text-green-600 dark:text-green-400">
             <CheckCircleIcon className="w-5 h-5 ml-2" filled />
             <span className="font-semibold">تم تسجيل هذه المحاضرة كمشاهدة.</span>
           </div>

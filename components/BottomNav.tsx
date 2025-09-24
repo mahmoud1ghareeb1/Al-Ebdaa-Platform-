@@ -21,7 +21,7 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeView, setActiveView }) => {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm z-20 mx-auto border-t border-slate-200 dark:border-blue-900/50">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm z-20 mx-auto border-t border-zinc-200 dark:border-zinc-800">
       <div className="flex justify-around items-center h-20">
         {navItems.map((item) => {
           const isActive = activeView === item.id;
@@ -30,7 +30,7 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeView, setActiveView }) => {
               key={item.id}
               onClick={() => setActiveView(item.id as View)}
               className={`flex flex-col items-center justify-center text-center w-full transition-colors duration-200 group ${
-                isActive ? 'text-blue-600 dark:text-blue-400' : 'text-slate-500 dark:text-slate-400 hover:text-blue-500 dark:hover:text-blue-400'
+                isActive ? 'text-blue-600 dark:text-blue-400' : 'text-zinc-500 dark:text-zinc-400 hover:text-blue-500 dark:hover:text-blue-400'
               }`}
             >
               <item.icon className="w-7 h-7 mb-1" filled={isActive} />

@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import type { Exam } from '../types';
 import { supabase } from '../lib/supabase';
@@ -22,14 +20,14 @@ const ExamCard: React.FC<{ exam: Exam; onStartExam: (exam: Exam) => void; type: 
     };
 
     return (
-        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-md dark:shadow-blue-900/20 transition-all duration-300 hover:shadow-xl dark:hover:shadow-blue-700/30 hover:-translate-y-1">
+        <div className="bg-white dark:bg-zinc-900 p-5 rounded-2xl shadow-md dark:shadow-blue-900/20 transition-all duration-300 hover:shadow-xl dark:hover:shadow-blue-700/30 hover:-translate-y-1">
             <div className="flex justify-between items-start">
-                <h3 className="text-lg font-bold text-slate-800 dark:text-slate-200">{exam.name}</h3>
+                <h3 className="text-lg font-bold text-zinc-800 dark:text-zinc-200">{exam.name}</h3>
                 {statusPill[type]}
             </div>
-            <div className="mt-4 border-t border-slate-200 dark:border-slate-800 pt-4 space-y-2 text-sm text-slate-600 dark:text-slate-400">
-                <p><span className="font-semibold text-slate-700 dark:text-slate-300">متاح من:</span> {formatDate(exam.start_date)}</p>
-                <p><span className="font-semibold text-slate-700 dark:text-slate-300">ينتهي في:</span> {formatDate(exam.end_date)}</p>
+            <div className="mt-4 border-t border-zinc-200 dark:border-zinc-800 pt-4 space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+                <p><span className="font-semibold text-zinc-700 dark:text-zinc-300">متاح من:</span> {formatDate(exam.start_date)}</p>
+                <p><span className="font-semibold text-zinc-700 dark:text-zinc-300">ينتهي في:</span> {formatDate(exam.end_date)}</p>
             </div>
             {type === 'available' && (
                 <div className="mt-4">
@@ -102,13 +100,13 @@ const ExamsScreen: React.FC<ExamsScreenProps> = ({ onStartExam }) => {
   
   const ExamSection: React.FC<{ title: string; exams: Exam[]; type: 'available' | 'missed' | 'taken'; onStartExam: (exam: Exam) => void; emptyMessage: string }> = ({ title, exams, type, onStartExam, emptyMessage }) => (
     <div>
-        <h2 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-4">{title}</h2>
+        <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-200 mb-4">{title}</h2>
         {exams.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {exams.map(exam => <ExamCard key={exam.id} exam={exam} onStartExam={onStartExam} type={type} />)}
             </div>
         ) : (
-            <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-sm text-center text-slate-500 dark:text-slate-400">
+            <div className="bg-white dark:bg-zinc-900 p-8 rounded-2xl shadow-sm text-center text-zinc-500 dark:text-zinc-400">
                 {emptyMessage}
             </div>
         )}

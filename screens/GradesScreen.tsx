@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import type { StudentProfile, ExamResult } from '../types';
@@ -25,8 +23,8 @@ interface GradesScreenProps {
 
 const InfoRow: React.FC<{ label: string; value: string | number }> = ({ label, value }) => (
   <div className="flex justify-between items-center py-3 text-right">
-    <span className="font-semibold text-slate-800 dark:text-slate-200">{label}</span>
-    <span className="text-slate-600 dark:text-slate-300 font-medium text-left">{value}</span>
+    <span className="font-semibold text-zinc-800 dark:text-zinc-200">{label}</span>
+    <span className="text-zinc-600 dark:text-zinc-300 font-medium text-left">{value}</span>
   </div>
 );
 
@@ -148,12 +146,12 @@ const GradesScreen: React.FC<GradesScreenProps> = ({ onReviewExam }) => {
   return (
     <div className="lg:grid lg:grid-cols-12 lg:gap-8 lg:items-start">
       <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-6">
-          <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-lg dark:shadow-blue-900/30 text-center space-y-4">
-            <div className="w-24 h-24 rounded-full mx-auto border-4 border-slate-200 dark:border-blue-800 overflow-hidden">
+          <div className="bg-white dark:bg-zinc-900 p-6 rounded-2xl shadow-lg dark:shadow-blue-900/30 text-center space-y-4">
+            <div className="w-24 h-24 rounded-full mx-auto border-4 border-zinc-200 dark:border-zinc-700 overflow-hidden">
                 <Avatar src={student.avatar_url} name={student.full_name} />
             </div>
-            <h2 className="text-xl font-bold text-slate-800 dark:text-slate-200">{student.full_name}</h2>
-            <div className="text-right divide-y divide-slate-200 dark:divide-blue-800/50">
+            <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-200">{student.full_name}</h2>
+            <div className="text-right divide-y divide-zinc-200 dark:divide-zinc-800">
                 <InfoRow label="اسم الطالب" value={student.full_name} />
                 <InfoRow label="عدد الامتحانات" value={student.examCount} />
                 <InfoRow label="عدد الدرجات الإجمالية" value={student.totalScore} />
@@ -163,12 +161,12 @@ const GradesScreen: React.FC<GradesScreenProps> = ({ onReviewExam }) => {
       </div>
       
       <div className="lg:col-span-8 mt-8 lg:mt-0">
-        <h3 className="text-xl font-bold text-center mb-4 text-slate-800 dark:text-slate-200">نتائج الاختبارات</h3>
+        <h3 className="text-xl font-bold text-center mb-4 text-zinc-800 dark:text-zinc-200">نتائج الاختبارات</h3>
         <div className="space-y-4">
           {examResults.length > 0 ? examResults.map((result) => (
-            <div key={result.id} className="bg-white dark:bg-slate-900 rounded-2xl shadow-md dark:shadow-blue-900/20 overflow-hidden">
+            <div key={result.id} className="bg-white dark:bg-zinc-900 rounded-2xl shadow-md dark:shadow-blue-900/20 overflow-hidden">
               <div className="p-5">
-                <h4 className="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4 text-right">{result.examName}</h4>
+                <h4 className="text-lg font-bold text-zinc-800 dark:text-zinc-200 mb-4 text-right">{result.examName}</h4>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
                     <StatCard icon={StarIcon} label="الدرجة" value={`${result.score} / ${result.total_grade}`} color="bg-amber-500" iconColor="text-amber-300" />
@@ -177,20 +175,20 @@ const GradesScreen: React.FC<GradesScreenProps> = ({ onReviewExam }) => {
                     <StatCard icon={ClockIcon} label="مدة الحل" value={`${result.solve_duration_minutes || '-'} دقيقة`} color="bg-blue-500" iconColor="text-blue-300" />
                 </div>
 
-                <p className="text-xs text-slate-400 dark:text-slate-500 text-center mb-4">
+                <p className="text-xs text-zinc-400 dark:text-zinc-500 text-center mb-4">
                   تم التسليم في: {new Date(result.created_at).toLocaleString('ar-EG', { dateStyle: 'short', timeStyle: 'short' })}
                 </p>
 
                 <button 
                   onClick={() => onReviewExam(result)} 
-                  className="w-full flex items-center justify-center bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold py-3 px-4 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                  className="w-full flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 font-semibold py-3 px-4 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
                 >
                   <DocumentTextIcon className="w-5 h-5 ml-2" />
                   مراجعة الاختبار
                 </button>
               </div>
             </div>
-          )) : <div className="text-center text-slate-500 dark:text-slate-400 p-6 bg-white dark:bg-slate-900 rounded-2xl shadow-sm">لا توجد نتائج متاحة للعرض حاليًا.</div>}
+          )) : <div className="text-center text-zinc-500 dark:text-zinc-400 p-6 bg-white dark:bg-zinc-900 rounded-2xl shadow-sm">لا توجد نتائج متاحة للعرض حاليًا.</div>}
         </div>
       </div>
     </div>
