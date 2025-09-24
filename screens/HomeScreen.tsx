@@ -78,7 +78,7 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
     { label: 'الاختبارات', icon: ClipboardListIcon, view: 'exams' as View },
     { label: 'صور السبورة', icon: CameraIcon, view: 'photos' as View },
     { label: 'الدرجات والنتائج', icon: ChartBarIcon, view: 'grades' as View },
-    { label: 'الواجب ورسائل المدرس', icon: BriefcaseIcon, view: 'homework' as View },
+    { label: 'الواجب ورسائل ال��درس', icon: BriefcaseIcon, view: 'homework' as View },
     { label: 'لوحة الشرف', icon: TrophyIcon, view: 'honorBoard' as View },
   ];
   
@@ -146,6 +146,16 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
       )}
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {canInstall && (
+          <button onClick={promptInstall} className="bg-white dark:bg-zinc-900 p-4 rounded-2xl shadow-md dark:shadow-blue-900/20 flex flex-col items-center justify-center space-y-2 text-center transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:shadow-xl hover:-translate-y-1">
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F44ea46af043947d6ac3e6b970a38b3d7%2Fe5aa813644d74d0390e3497f36ad5e4f?format=png&width=96"
+              alt="تثبيت التطبيق"
+              className="w-10 h-10 rounded-xl object-cover"
+            />
+            <span className="font-semibold text-zinc-700 dark:text-zinc-300">تثبيت التطبيق</span>
+          </button>
+        )}
         {gridItems.map((item) => (
           <button key={item.label} onClick={() => setActiveView(item.view)} className="bg-white dark:bg-zinc-900 p-4 rounded-2xl shadow-md dark:shadow-blue-900/20 flex flex-col items-center justify-center space-y-2 text-center transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:shadow-xl hover:-translate-y-1">
             <item.icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
