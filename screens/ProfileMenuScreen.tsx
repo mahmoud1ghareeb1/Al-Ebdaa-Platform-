@@ -21,36 +21,34 @@ interface ProfileMenuProps {
 }
 
 const ThemeToggle: React.FC = () => {
-    const { theme, toggleTheme } = useTheme();
+    const toggle = () => {
+      const root = window.document.documentElement;
+      const isDark = root.classList.contains('dark');
+      if (isDark) {
+        root.classList.remove('dark');
+        root.classList.add('light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        root.classList.remove('light');
+        root.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    };
 
     return (
         <button
-            onClick={toggleTheme}
-            className={`relative inline-flex h-8 w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent p-1 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-900 ${
-            theme === 'dark' ? 'bg-blue-600' : 'bg-zinc-300'
-            }`}
+            onClick={toggle}
+            className={`relative inline-flex h-8 w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent p-1 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-900`}
             aria-label="Toggle dark mode"
         >
             <span
                 aria-hidden="true"
-                className={`pointer-events-none relative inline-block h-6 w-6 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                theme === 'dark' ? '-translate-x-6' : 'translate-x-0'
-                }`}
+                className={`pointer-events-none relative inline-block h-6 w-6 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out`}
             >
-                {/* Light mode icon container */}
-                <span
-                    className={`absolute inset-0 flex h-full w-full items-center justify-center transition-opacity duration-200 ${
-                    theme === 'light' ? 'opacity-100 ease-in' : 'opacity-0 ease-out'
-                    }`}
-                >
+                <span className="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity duration-200 dark:opacity-100 opacity-0">
                     <SunIcon className="h-4 w-4 text-amber-500" />
                 </span>
-                {/* Dark mode icon container */}
-                <span
-                    className={`absolute inset-0 flex h-full w-full items-center justify-center transition-opacity duration-200 ${
-                    theme === 'dark' ? 'opacity-100 ease-in' : 'opacity-0 ease-out'
-                    }`}
-                >
+                <span className="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity duration-200 dark:opacity-0 opacity-100">
                     <MoonIcon className="h-4 w-4 text-blue-600" />
                 </span>
             </span>
@@ -106,7 +104,7 @@ const ProfileMenuScreen: React.FC<ProfileMenuProps> = ({ isOpen, onClose, setAct
         onClose={() => setShowLogoutConfirm(false)}
         onConfirm={handleLogout}
         title="تأكيد تسجيل الخروج"
-        message="��ل أنت متأكد أنك تريد تسجيل الخروج؟"
+        message="هل أنت متأكد أنك تريد تسجيل الخروج؟"
         confirmText="تسجيل الخروج"
       />
       <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={onClose}>
