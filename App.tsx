@@ -73,9 +73,15 @@ const App: React.FC = () => {
     
     // Render modal screens if active
     if (reviewingExam) {
-        return <ExamReviewScreen 
-            examResult={reviewingExam} 
-            onBack={() => setReviewingExam(null)} 
+        return <ExamReviewScreen
+            examResult={reviewingExam}
+            onBack={() => setReviewingExam(null)}
+        />;
+    }
+    if (studyingExam) {
+        return <ExamStudyScreen
+            exam={studyingExam}
+            onBack={() => setStudyingExam(null)}
         />;
     }
     if (examResult) {
