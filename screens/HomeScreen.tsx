@@ -7,6 +7,9 @@ import CameraIcon from '../components/icons/CameraIcon';
 import ChartBarIcon from '../components/icons/ChartBarIcon';
 import BriefcaseIcon from '../components/icons/BriefcaseIcon';
 import TrophyIcon from '../components/icons/TrophyIcon';
+import SettingsIcon from '../components/icons/SettingsIcon';
+import StarIcon from '../components/icons/StarIcon';
+import UserCircleIcon from '../components/icons/UserCircleIcon';
 import ChevronLeftIcon from '../components/icons/ChevronLeftIcon';
 import CheckCircleIcon from '../components/icons/CheckCircleIcon';
 import PlayIcon from '../components/icons/PlayIcon';
@@ -20,6 +23,7 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
   const [student, setStudent] = useState<(StudentProfile & {rank: number}) | null>(null);
   const [performancePercentage, setPerformancePercentage] = useState(0);
   const { canInstall, promptInstall } = usePWAInstall();
+  const SUPPORT_LINK = 'https://chat.whatsapp.com/ECuwxXPZN0G94hOwVEz9lP?mode=ems_share_t';
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const isAndroid = /Android/i.test(navigator.userAgent);
   const handleAndroidInstall = async () => {
@@ -174,6 +178,19 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
           />
           <span className="font-semibold text-zinc-700 dark:text-zinc-300">تثبيت التطبيق على الآيفون</span>
         </button>
+        {/* روابط واتساب للجروبات */}
+        <a href={SUPPORT_LINK} target="_blank" rel="noopener noreferrer" className="bg-white dark:bg-zinc-900 p-4 rounded-2xl shadow-md dark:shadow-blue-900/20 flex flex-col items-center justify-center space-y-2 text-center transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:shadow-xl hover:-translate-y-1">
+          <SettingsIcon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+          <span className="font-semibold text-zinc-700 dark:text-zinc-300">الدعم الفني</span>
+        </a>
+        <a href={SUPPORT_LINK} target="_blank" rel="noopener noreferrer" className="bg-white dark:bg-zinc-900 p-4 rounded-2xl shadow-md dark:shadow-blue-900/20 flex flex-col items-center justify-center space-y-2 text-center transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:shadow-xl hover:-translate-y-1">
+          <StarIcon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+          <span className="font-semibold text-zinc-700 dark:text-zinc-300">الدعم العلمي</span>
+        </a>
+        <a href={SUPPORT_LINK} target="_blank" rel="noopener noreferrer" className="bg-white dark:bg-zinc-900 p-4 rounded-2xl shadow-md dark:shadow-blue-900/20 flex flex-col items-center justify-center space-y-2 text-center transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:shadow-xl hover:-translate-y-1">
+          <UserCircleIcon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+          <span className="font-semibold text-zinc-700 dark:text-zinc-300">جروب المستر</span>
+        </a>
         {gridItems.map((item) => (
           <button key={item.label} onClick={() => setActiveView(item.view)} className="bg-white dark:bg-zinc-900 p-4 rounded-2xl shadow-md dark:shadow-blue-900/20 flex flex-col items-center justify-center space-y-2 text-center transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:shadow-xl hover:-translate-y-1">
             <item.icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
