@@ -2,6 +2,7 @@ import React, { useState, useEffect, Suspense } from 'react';
 import Header from './components/Header';
 import BottomNav from './components/BottomNav';
 import AuthScreen from './screens/AuthScreen';
+import IntroScreen from './screens/IntroScreen';
 import { supabase } from './lib/supabase';
 import type { Session } from '@supabase/supabase-js';
 import type { View, Lecture, Exam, ExamResult } from './types';
@@ -64,7 +65,7 @@ const App: React.FC = () => {
     account: 'حسابي',
     honorBoard: 'لوحة الشرف',
     homework: 'الواجبات',
-    notes: 'المذكرا�� المتاحة',
+    notes: 'المذكرا���� المتاحة',
     photos: 'صور متاحة',
   };
   
