@@ -20,6 +20,18 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
   const [student, setStudent] = useState<(StudentProfile & {rank: number}) | null>(null);
   const [performancePercentage, setPerformancePercentage] = useState(0);
   const { canInstall, promptInstall } = usePWAInstall();
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  const handleAndroidInstall = async () => {
+    if (canInstall) {
+      await promptInstall();
+      return;
+    }
+    alert('إذا لم يظهر زر التثبيت، استخدم من قائمة المتصفح: إضافة إلى الشاشة الرئيسية.');
+  };
+  const handleIOSInstall = () => {
+    alert('لتثبيت على iPhone/iPad: افتح قائمة المشاركة \u2192 اختر إضافة إلى الشاشة الرئيسية \u2192 ثم إضافة.');
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -146,16 +158,22 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
       )}
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {canInstall && (
-          <button onClick={promptInstall} className="bg-white dark:bg-zinc-900 p-4 rounded-2xl shadow-md dark:shadow-blue-900/20 flex flex-col items-center justify-center space-y-2 text-center transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:shadow-xl hover:-translate-y-1">
-            <img
-              src="https://cdn.builder.io/api/v1/image/assets%2F44ea46af043947d6ac3e6b970a38b3d7%2Fe5aa813644d74d0390e3497f36ad5e4f?format=png&width=96"
-              alt="تثبيت التطبيق"
-              className="w-10 h-10 rounded-xl object-cover"
-            />
-            <span className="font-semibold text-zinc-700 dark:text-zinc-300">تثبيت على الهاتف</span>
-          </button>
-        )}
+        <button onClick={handleAndroidInstall} className="bg-white dark:bg-zinc-900 p-4 rounded-2xl shadow-md dark:shadow-blue-900/20 flex flex-col items-center justify-center space-y-2 text-center transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:shadow-xl hover:-translate-y-1">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets%2F44ea46af043947d6ac3e6b970a38b3d7%2Fe5aa813644d74d0390e3497f36ad5e4f?format=png&width=96"
+            alt="تثبيت التطبيق على الأندرويد"
+            className="w-10 h-10 rounded-xl object-cover"
+          />
+          <span className="font-semibold text-zinc-700 dark:text-zinc-300">تثبيت التطبيق على الأندرويد</span>
+        </button>
+        <button onClick={handleIOSInstall} className="bg-white dark:bg-zinc-900 p-4 rounded-2xl shadow-md dark:shadow-blue-900/20 flex flex-col items-center justify-center space-y-2 text-center transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:shadow-xl hover:-translate-y-1">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets%2F44ea46af043947d6ac3e6b970a38b3d7%2Fe5aa813644d74d0390e3497f36ad5e4f?format=png&width=96"
+            alt="تثبيت التطبيق على الآيفون"
+            className="w-10 h-10 rounded-xl object-cover"
+          />
+          <span className="font-semibold text-zinc-700 dark:text-zinc-300">تثبيت التطبيق على الآيفون</span>
+        </button>
         {gridItems.map((item) => (
           <button key={item.label} onClick={() => setActiveView(item.view)} className="bg-white dark:bg-zinc-900 p-4 rounded-2xl shadow-md dark:shadow-blue-900/20 flex flex-col items-center justify-center space-y-2 text-center transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:shadow-xl hover:-translate-y-1">
             <item.icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
