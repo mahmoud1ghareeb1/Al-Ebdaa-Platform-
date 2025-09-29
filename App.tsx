@@ -38,6 +38,7 @@ const App: React.FC = () => {
   const [examResult, setExamResult] = useState<{ exam: Exam; score: number; totalQuestions: number; correctAnswers: number; } | null>(null);
   const [reviewingExam, setReviewingExam] = useState<ExamResult | null>(null);
   const [studyingExam, setStudyingExam] = useState<Exam | null>(null);
+  const [showAuth, setShowAuth] = useState(false);
 
 
   useEffect(() => {
@@ -62,10 +63,10 @@ const App: React.FC = () => {
     lectures: 'الحصص والمحاضرات',
     exams: 'الاختبارات',
     grades: 'الدرجات والنتائج',
-    account: 'حسابي',
+    account: '��سابي',
     honorBoard: 'لوحة الشرف',
     homework: 'الواجبات',
-    notes: 'المذكرا���� المتاحة',
+    notes: 'المذكرا�� المتاحة',
     photos: 'صور متاحة',
   };
   
