@@ -22,6 +22,7 @@ const ExamStartScreen = React.lazy(() => import('./screens/ExamStartScreen'));
 const ExamInProgressScreen = React.lazy(() => import('./screens/ExamInProgressScreen'));
 const ExamResultsScreen = React.lazy(() => import('./screens/ExamResultsScreen'));
 const ExamReviewScreen = React.lazy(() => import('./screens/ExamReviewScreen'));
+const ExamStudyScreen = React.lazy(() => import('./screens/ExamStudyScreen'));
 
 const App: React.FC = () => {
   const [session, setSession] = useState<Session | null>(null);
