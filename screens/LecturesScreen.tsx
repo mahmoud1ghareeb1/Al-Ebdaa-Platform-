@@ -65,17 +65,34 @@ const LecturesScreen: React.FC<LecturesScreenProps> = ({ onSelectLecture }) => {
 
   if (loading) {
     return (
+      <div className="space-y-6">
+        <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-200">الحصص والدروس</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {Array.from({ length: 8 }).map((_, i) => <LectureCardSkeleton key={i} />)}
+          {Array.from({ length: 8 }).map((_, i) => <LectureCardSkeleton key={i} />)}
         </div>
+      </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {lectures.map((lecture) => (
-        <LectureCard key={lecture.id} lecture={lecture} onSelect={onSelectLecture} />
-      ))}
+    <div className="space-y-6">
+      <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-200">الحصص والدروس</h2>
+      {lectures.length === 0 ? (
+        <div className="bg-white dark:bg-zinc-900 p-5 rounded-2xl shadow-lg shadow-blue-500/5 dark:shadow-blue-900/30">
+          <p className="font-bold text-zinc-800 dark:text-zinc-200 mb-2">لا توجد دروس متاحة الآن</p>
+          <ul className="list-disc pr-5 text-sm text-zinc-600 dark:text-zinc-300 space-y-1">
+            <li>تأكد من اتصالك بالإنترنت ثم أعد تحميل الصفحة.</li>
+            <li>انتظر نشر الحصص الجديدة من المدرس إن كنت طالبًا جديدًا.</li>
+            <li>إذا كنت تتوقع وجود دروس، تواصل مع المدرس للتحقق من الصلاحيات.</li>
+          </ul>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {lectures.map((lecture) => (
+            <LectureCard key={lecture.id} lecture={lecture} onSelect={onSelectLecture} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
