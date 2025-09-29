@@ -64,7 +64,7 @@ const App: React.FC = () => {
     account: 'حسابي',
     honorBoard: 'لوحة الشرف',
     homework: 'الواجبات',
-    notes: 'المذكرات المتاحة',
+    notes: 'المذكرا�� المتاحة',
     photos: 'صور متاحة',
   };
   
@@ -117,7 +117,7 @@ const App: React.FC = () => {
       case 'lectures':
         return <LecturesScreen onSelectLecture={setPlayingLecture} />;
       case 'exams':
-        return <ExamsScreen onStartExam={setStartingExam} />;
+        return <ExamsScreen onStartExam={setStartingExam} onStudyExam={setStudyingExam} />;
       case 'grades':
         return <GradesScreen onReviewExam={setReviewingExam} />;
       case 'account':
