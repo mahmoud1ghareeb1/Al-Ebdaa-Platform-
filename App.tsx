@@ -36,6 +36,7 @@ const App: React.FC = () => {
   const [activeExam, setActiveExam] = useState<Exam | null>(null);
   const [examResult, setExamResult] = useState<{ exam: Exam; score: number; totalQuestions: number; correctAnswers: number; } | null>(null);
   const [reviewingExam, setReviewingExam] = useState<ExamResult | null>(null);
+  const [studyingExam, setStudyingExam] = useState<Exam | null>(null);
 
 
   useEffect(() => {
