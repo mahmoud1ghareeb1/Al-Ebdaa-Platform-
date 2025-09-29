@@ -63,7 +63,7 @@ const App: React.FC = () => {
     lectures: 'الحصص والمحاضرات',
     exams: 'الاختبارات',
     grades: 'الدرجات والنتائج',
-    account: '��سابي',
+    account: 'حسابي',
     honorBoard: 'لوحة الشرف',
     homework: 'الواجبات',
     notes: 'المذكرا�� المتاحة',
@@ -141,9 +141,9 @@ const App: React.FC = () => {
     if (loading) {
       return <div className="min-h-screen bg-zinc-100 dark:bg-zinc-950 flex justify-center items-center"><p>Loading...</p></div>;
     }
-    
+
     if (!session) {
-      return <AuthScreen />;
+      return showAuth ? <AuthScreen /> : <IntroScreen onContinue={() => setShowAuth(true)} />;
     }
 
     const isModalScreenActive = !!(playingLecture || startingExam || activeExam || examResult || reviewingExam);
