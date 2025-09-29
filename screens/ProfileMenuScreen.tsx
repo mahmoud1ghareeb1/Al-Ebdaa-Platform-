@@ -10,7 +10,6 @@ import LogoutIcon from '../components/icons/LogoutIcon';
 import SunIcon from '../components/icons/SunIcon';
 import MoonIcon from '../components/icons/MoonIcon';
 import type { View, StudentProfile } from '../types';
-import { useTheme } from '../ThemeContext';
 import Avatar from '../components/Avatar';
 import ConfirmationModal from '../components/ConfirmationModal';
 
@@ -107,7 +106,7 @@ const ProfileMenuScreen: React.FC<ProfileMenuProps> = ({ isOpen, onClose, setAct
         onClose={() => setShowLogoutConfirm(false)}
         onConfirm={handleLogout}
         title="تأكيد تسجيل الخروج"
-        message="هل أنت متأكد أنك تريد تسجيل الخروج؟"
+        message="��ل أنت متأكد أنك تريد تسجيل الخروج؟"
         confirmText="تسجيل الخروج"
       />
       <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={onClose}>
