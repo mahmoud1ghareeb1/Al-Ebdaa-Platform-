@@ -5,9 +5,10 @@ import Spinner from '../components/Spinner';
 
 interface ExamsScreenProps {
     onStartExam: (exam: Exam) => void;
+    onStudyExam: (exam: Exam) => void;
 }
 
-const ExamCard: React.FC<{ exam: Exam; onStartExam: (exam: Exam) => void; type: 'available' | 'missed' | 'taken' }> = ({ exam, onStartExam, type }) => {
+const ExamCard: React.FC<{ exam: Exam; onStartExam: (exam: Exam) => void; onStudyExam: (exam: Exam) => void; type: 'available' | 'missed' | 'taken' }> = ({ exam, onStartExam, onStudyExam, type }) => {
     const formatDate = (dateString: string | null) => {
         if (!dateString) return 'غير محدد';
         return new Date(dateString).toLocaleString('ar-EG', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
@@ -36,11 +37,18 @@ const ExamCard: React.FC<{ exam: Exam; onStartExam: (exam: Exam) => void; type: 
                     </button>
                 </div>
             )}
+            {type === 'missed' && (
+                <div className="mt-4">
+                    <button onClick={() => onStudyExam(exam)} className="w-full bg-amber-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-amber-600 transition shadow-md shadow-amber-500/20 dark:shadow-lg dark:shadow-amber-400/30">
+                        مذاكرة
+                    </button>
+                </div>
+            )}
         </div>
     );
 };
 
-const ExamsScreen: React.FC<ExamsScreenProps> = ({ onStartExam }) => {
+const ExamsScreen: React.FC<ExamsScreenProps> = ({ onStartExam, onStudyExam }) => {
   const [availableExams, setAvailableExams] = useState<Exam[]>([]);
   const [missedExams, setMissedExams] = useState<Exam[]>([]);
   const [takenExams, setTakenExams] = useState<Exam[]>([]);
@@ -52,6 +60,28 @@ const ExamsScreen: React.FC<ExamsScreenProps> = ({ onStartExam }) => {
         setLoading(true);
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) throw new Error("User not found");
+        const { cacheGet, cacheSet } = await import('../lib/cache');
+        const cExams = cacheGet<Exam[]>('exams:all');
+        const cSubs = cacheGet<number[]>(`subs:${user.id}`);
+        if (cExams && cSubs) {
+          const submittedExamIds = new Set(cSubs);
+          const now = new Date();
+          const available: Exam[] = [];
+          const missed: Exam[] = [];
+          const taken: Exam[] = [];
+          cExams.forEach(exam => {
+            if (submittedExamIds.has(exam.id)) {
+              taken.push(exam); return;
+            }
+            const endDate = exam.end_date ? new Date(exam.end_date) : null;
+            if (endDate && endDate > now) available.push(exam);
+            else if (endDate && endDate < now) missed.push(exam);
+            else available.push(exam);
+          });
+          setAvailableExams(available);
+          setMissedExams(missed);
+          setTakenExams(taken);
+        }
 
         const [examsRes, submissionsRes] = await Promise.all([
           supabase.from('exams').select('*').order('start_date', { ascending: false }),
@@ -60,6 +90,8 @@ const ExamsScreen: React.FC<ExamsScreenProps> = ({ onStartExam }) => {
 
         if (examsRes.error) throw examsRes.error;
         if (submissionsRes.error) throw submissionsRes.error;
+        cacheSet('exams:all', examsRes.data);
+        cacheSet(`subs:${user.id}`, submissionsRes.data.map(s => s.exam_id));
 
         const submittedExamIds = new Set(submissionsRes.data.map(s => s.exam_id));
         const now = new Date();
@@ -98,12 +130,12 @@ const ExamsScreen: React.FC<ExamsScreenProps> = ({ onStartExam }) => {
 
   if (loading) return <Spinner />;
   
-  const ExamSection: React.FC<{ title: string; exams: Exam[]; type: 'available' | 'missed' | 'taken'; onStartExam: (exam: Exam) => void; emptyMessage: string }> = ({ title, exams, type, onStartExam, emptyMessage }) => (
+  const ExamSection: React.FC<{ title: string; exams: Exam[]; type: 'available' | 'missed' | 'taken'; onStartExam: (exam: Exam) => void; onStudyExam: (exam: Exam) => void; emptyMessage: string }> = ({ title, exams, type, onStartExam, onStudyExam, emptyMessage }) => (
     <div>
         <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-200 mb-4">{title}</h2>
         {exams.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {exams.map(exam => <ExamCard key={exam.id} exam={exam} onStartExam={onStartExam} type={type} />)}
+                {exams.map(exam => <ExamCard key={exam.id} exam={exam} onStartExam={onStartExam} onStudyExam={onStudyExam} type={type} />)}
             </div>
         ) : (
             <div className="bg-white dark:bg-zinc-900 p-8 rounded-2xl shadow-sm text-center text-zinc-500 dark:text-zinc-400">
@@ -115,25 +147,28 @@ const ExamsScreen: React.FC<ExamsScreenProps> = ({ onStartExam }) => {
 
   return (
     <div className="space-y-8">
-        <ExamSection 
+        <ExamSection
             title="اختبارات متاحة"
             exams={availableExams}
             type="available"
             onStartExam={onStartExam}
+            onStudyExam={onStudyExam}
             emptyMessage="لا توجد اختبارات متاحة حالياً."
         />
-        <ExamSection 
+        <ExamSection
             title="امتحانات فاتتك"
             exams={missedExams}
             type="missed"
             onStartExam={onStartExam}
+            onStudyExam={onStudyExam}
             emptyMessage="ليس لديك امتحانات فائتة."
         />
-        <ExamSection 
+        <ExamSection
             title="امتحانات تم حلها"
             exams={takenExams}
             type="taken"
             onStartExam={onStartExam}
+            onStudyExam={onStudyExam}
             emptyMessage="لم تقم بحل أي امتحانات بعد."
         />
     </div>

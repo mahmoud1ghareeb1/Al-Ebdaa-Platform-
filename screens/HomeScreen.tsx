@@ -43,8 +43,24 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
         setLoading(true);
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) throw new Error("User not found");
+        const { cacheGet, cacheSet } = await import('../lib/cache');
+        // hydrate from cache first
+        const cLectures = cacheGet<any[]>('home:lectures4');
+        const cViews = cacheGet<number[]>(`views:${user.id}`);
+        const cProfile = cacheGet<any>('profile:self');
+        const cRank = cacheGet<number | null>(`rank:${user.id}`);
+        const cTotal = cacheGet<number>('students:count');
+        if (cLectures && cViews) {
+          const watchedIds = new Set(cViews);
+          setUnwatchedLectures(cLectures.filter(lec => !watchedIds.has(lec.id)));
+        }
+        if (cProfile) setStudent({ ...cProfile, rank: cRank ?? 0 });
+        if (cRank && cTotal) {
+          const percentage = Math.max(0, 100 - (((cRank - 1) / cTotal) * 100));
+          setPerformancePercentage(Math.round(percentage));
+        }
 
-        // Fetch lectures, views, profile, and rank
+        // network fetch and update cache
         const [lecturesRes, viewsRes, profileRes, honorBoardRes, totalStudentsRes] = await Promise.all([
             supabase.from('lectures').select('*').order('created_at', { ascending: false }).limit(4),
             supabase.from('lecture_views').select('lecture_id').eq('user_id', user.id),
@@ -52,36 +68,29 @@ const HomeScreen: React.FC<{ setActiveView: (view: View) => void }> = ({ setActi
             supabase.from('honor_board').select('rank').eq('id', user.id).single(),
             supabase.from('profiles').select('id', { count: 'exact', head: true })
         ]);
-        
         if (lecturesRes.error) throw lecturesRes.error;
         if (viewsRes.error) throw viewsRes.error;
         if (profileRes.error) throw profileRes.error;
-        // A student might not be on the honor board, so honorBoardRes.error is not critical
-        
-        if (!profileRes.data) {
-          throw new Error("Student profile not found.");
-        }
-
-        // Calculate unwatched lectures
+        if (!profileRes.data) throw new Error('Student profile not found.');
+        cacheSet('home:lectures4', lecturesRes.data);
+        cacheSet(`views:${user.id}`, viewsRes.data.map(v => v.lecture_id));
+        cacheSet('profile:self', profileRes.data);
+        cacheSet(`rank:${user.id}`, honorBoardRes.data?.rank ?? 0);
+        cacheSet('students:count', totalStudentsRes.count ?? 1);
         const watchedIds = new Set(viewsRes.data.map(v => v.lecture_id));
         const unwatched = lecturesRes.data.filter(lec => !watchedIds.has(lec.id));
         setUnwatchedLectures(unwatched);
-
-        // Set student data, handling cases where rank might not exist
         const rank = honorBoardRes.data?.rank;
         setStudent({ ...profileRes.data, rank: rank ?? 0 });
-
-        // Calculate performance percentage only if rank is available
         const totalStudents = totalStudentsRes.count ?? 1;
         if (rank && totalStudents > 0) {
           const percentage = Math.max(0, 100 - (((rank - 1) / totalStudents) * 100));
           setPerformancePercentage(Math.round(percentage));
         } else {
-            setPerformancePercentage(0);
+          setPerformancePercentage(0);
         }
-
       } catch (error) {
-        console.error("Error fetching home screen data:", error);
+        console.error('Error fetching home screen data:', error);
       } finally {
         setLoading(false);
       }

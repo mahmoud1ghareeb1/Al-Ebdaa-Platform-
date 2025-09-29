@@ -38,6 +38,15 @@ const LecturesScreen: React.FC<LecturesScreenProps> = ({ onSelectLecture }) => {
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) throw new Error("User not found");
 
+        // try cache first
+        const { cacheGet, cacheSet } = await import('../lib/cache');
+        const cachedLectures = cacheGet<any[]>(`lectures:all`);
+        const cachedViews = cacheGet<number[]>(`views:${user.id}`);
+        if (cachedLectures && cachedViews) {
+          const watchedIds = new Set(cachedViews);
+          setLectures(cachedLectures.map(lec => ({ ...lec, watched: watchedIds.has(lec.id) })));
+        }
+
         const [lecturesRes, viewsRes] = await Promise.all([
           supabase.from('lectures').select('*').order('created_at', { ascending: false }),
           supabase.from('lecture_views').select('lecture_id').eq('user_id', user.id)
@@ -51,9 +60,9 @@ const LecturesScreen: React.FC<LecturesScreenProps> = ({ onSelectLecture }) => {
           ...lec,
           watched: watchedIds.has(lec.id),
         }));
-        
         setLectures(allLectures);
-
+        cacheSet(`lectures:all`, lecturesRes.data);
+        cacheSet(`views:${user.id}`, viewsRes.data.map(v => v.lecture_id));
       } catch (error) {
         console.error('Error fetching lectures:', error);
       } finally {

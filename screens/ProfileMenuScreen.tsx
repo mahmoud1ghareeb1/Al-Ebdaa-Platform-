@@ -12,6 +12,7 @@ import MoonIcon from '../components/icons/MoonIcon';
 import type { View, StudentProfile } from '../types';
 import Avatar from '../components/Avatar';
 import ConfirmationModal from '../components/ConfirmationModal';
+import { cacheGet, cacheSet } from '../lib/cache';
 
 
 interface ProfileMenuProps {
@@ -62,8 +63,10 @@ const ProfileMenuScreen: React.FC<ProfileMenuProps> = ({ isOpen, onClose, setAct
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   useEffect(() => {
-    if (isOpen && !profile) {
-      const fetchProfile = async () => {
+    const load = async () => {
+      const cached = cacheGet<StudentProfile>('profile:self');
+      if (cached) setProfile(cached);
+      if (isOpen) {
         try {
           const { data: { user } } = await supabase.auth.getUser();
           if (!user) return;
@@ -74,13 +77,14 @@ const ProfileMenuScreen: React.FC<ProfileMenuProps> = ({ isOpen, onClose, setAct
             .single();
           if (error) throw error;
           setProfile(data);
+          cacheSet('profile:self', data, 1000 * 60 * 60 * 24 * 7);
         } catch (error) {
           console.error("Error fetching profile for menu:", error);
         }
-      };
-      fetchProfile();
-    }
-  }, [isOpen, profile]);
+      }
+    };
+    load();
+  }, [isOpen]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -88,7 +92,7 @@ const ProfileMenuScreen: React.FC<ProfileMenuProps> = ({ isOpen, onClose, setAct
   };
 
   const menuItems = [
-    { label: 'الصفحة الرئيسية', icon: HomeIcon, view: 'home' as View },
+    { label: 'الصفحة ال��ئيسية', icon: HomeIcon, view: 'home' as View },
     { label: 'الاختبارات', icon: ClipboardListIcon, view: 'exams' as View },
     { label: 'المحاضرات', icon: PlayIcon, view: 'lectures' as View, highlight: true },
     { label: 'الدرجات والنتائج', icon: ChartBarIcon, view: 'grades' as View },
