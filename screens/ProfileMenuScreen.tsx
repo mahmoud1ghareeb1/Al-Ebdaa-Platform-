@@ -92,7 +92,7 @@ const ProfileMenuScreen: React.FC<ProfileMenuProps> = ({ isOpen, onClose, setAct
   };
 
   const menuItems = [
-    { label: 'الصفحة ال��ئيسية', icon: HomeIcon, view: 'home' as View },
+    { label: 'الصفحة الرئيسية', icon: HomeIcon, view: 'home' as View },
     { label: 'الاختبارات', icon: ClipboardListIcon, view: 'exams' as View },
     { label: 'المحاضرات', icon: PlayIcon, view: 'lectures' as View, highlight: true },
     { label: 'الدرجات والنتائج', icon: ChartBarIcon, view: 'grades' as View },
