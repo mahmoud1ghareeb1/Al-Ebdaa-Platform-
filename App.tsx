@@ -66,7 +66,7 @@ const App: React.FC = () => {
     account: 'حسابي',
     honorBoard: 'لوحة الشرف',
     homework: 'الواجبات',
-    notes: 'المذكرا�� المتاحة',
+    notes: 'المذكرات المتاحة',
     photos: 'صور متاحة',
   };
   
